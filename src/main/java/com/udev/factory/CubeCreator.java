@@ -10,7 +10,7 @@ import com.udev.figures.Figure;
  *         Date: 04.05.13
  *         Time: 19:29
  */
-public class CureCreator implements FigureCreator {
+public class CubeCreator implements FigureCreator {
     @Override
     public Figure createFigure() {
         return new Cube();

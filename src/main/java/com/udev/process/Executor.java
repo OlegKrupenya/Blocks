@@ -1,6 +1,6 @@
 package com.udev.process;
 
-import com.udev.factory.CureCreator;
+import com.udev.factory.CubeCreator;
 import com.udev.factory.FigureCreator;
 import com.udev.field.Field;
 import com.udev.figures.Figure;
@@ -26,15 +26,17 @@ public class Executor {
         FigureCreator creator = null;
         while (field.isNotFull()) {
             creator = getCreator(0);
+            field.showFieldData();
             Figure figure = creator.createFigure();
             field.addFigureToField(figure);
+            field.showFieldData();
         }
     }
 
     private static FigureCreator getCreator(int index) {
         FigureCreator creator = null;
         if (index == 0) {
-            creator = new CureCreator();
+            creator = new CubeCreator();
         }
         return creator;
     }

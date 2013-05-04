@@ -1,6 +1,8 @@
 package com.udev.field;
 
 import com.udev.figures.Figure;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,8 +13,10 @@ import com.udev.figures.Figure;
  */
 public class Field {
 
-    public static final int WIDTH = 10;
-    public static final int HEIGHT = 20;
+    private static final Logger logger = LoggerFactory.getLogger(Field.class);
+
+    public static final int WIDTH = 20;
+    public static final int HEIGHT = 10;
     public static final int CREATE_FIGURE_LEFT_COORDINATE = 5;
 
     /**
@@ -40,6 +44,8 @@ public class Field {
             }
             dataI++;
         }
+        // REMOVE IMMEDIATELY!!!
+        hasSpace = false;
     }
 
     /**
@@ -50,6 +56,21 @@ public class Field {
      */
     public boolean isNotFull() {
         return hasSpace;
+    }
+
+    /**
+     *  Logs the current state of the data
+     */
+    public void showFieldData() {
+        logger.debug("\n\n The data:");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                sb.append(data[i][j] + " ");
+            }
+            sb.append("\n");
+        }
+        logger.debug("\n" + sb.toString());
     }
 
     /**

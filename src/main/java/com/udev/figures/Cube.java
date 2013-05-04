@@ -63,7 +63,7 @@ public class Cube implements Figure {
     private void clear() {
         for (int i = 0; i < CUBE_HEIGHT; i++) {
             for (int j = 0; j < CUBE_HEIGHT; j++) {
-                data[i][j] = 0;
+                data[i][j] = 1;
             }
         }
     }
