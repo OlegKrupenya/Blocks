@@ -1,3 +1,5 @@
 target/*
 out/*
+ssh_key
+shh_key.pub
 
