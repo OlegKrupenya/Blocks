@@ -16,6 +16,10 @@ public class Cube implements Figure {
     private int height;
     private int width;
 
+    public Cube() {
+        init();
+    }
+
 
     @Override
     public int[][] getData() {

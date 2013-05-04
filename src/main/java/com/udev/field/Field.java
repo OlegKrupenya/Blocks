@@ -17,7 +17,7 @@ public class Field {
 
     public static final int WIDTH = 20;
     public static final int HEIGHT = 10;
-    public static final int CREATE_FIGURE_LEFT_COORDINATE = 5;
+    public static final int CREATE_FIGURE_LEFT_COORDINATE = 4;
 
     /**
      * Is set to <code>true</code> when there is enough space to create a new figure.
@@ -35,13 +35,14 @@ public class Field {
         int figureWidth = figure.getWidth();
         int figureHeight = figure.getHeight();
 
-        int dataI = CREATE_FIGURE_LEFT_COORDINATE;
-        int dataJ = 0;
+        int dataI = 0;
+        int dataJ = CREATE_FIGURE_LEFT_COORDINATE;
         for (int i = 0; i < figureWidth; i++) {
             for (int j = 0; j < figureHeight; j++) {
                 data[dataI][dataJ] = figureData[i][j];
                 dataJ++;
             }
+            dataJ = CREATE_FIGURE_LEFT_COORDINATE;
             dataI++;
         }
         // REMOVE IMMEDIATELY!!!
