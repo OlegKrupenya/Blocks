@@ -19,9 +19,7 @@ public class Executor {
     private static final Logger logger = LoggerFactory.getLogger(Executor.class);
 
     public static void main(String[] args) {
-
         logger.debug("Starting the application...");
-
         Field field = new Field();
         FigureCreator creator = null;
         while (field.isNotFull()) {
