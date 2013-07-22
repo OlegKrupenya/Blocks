@@ -2,4 +2,6 @@ target/*
 out/*
 ssh_key
 ssh_key.pub
+Tetris.iml
+.idea/*
 
