@@ -22,20 +22,21 @@ public class Executor {
         logger.debug("Starting the application...");
         Field field = new Field();
         FigureCreator creator = null;
+        FigureActionManager manager = new FigureActionManager();
         while (field.isNotFull()) {
-            creator = getCreator(0);
-            field.showFieldData();
-            Figure figure = creator.createFigure();
-            field.addFigureToField(figure);
-            field.showFieldData();
+            Figure figure = null;
+            if (field.isCanMoveTheFigure()) {
+                creator = manager.getCreator(0);
+                field.showFieldData();
+                figure = creator.createFigure();
+                manager.addFigureToField(figure, field);
+                field.showFieldData();
+            }  else {
+                manager.moveFigure(figure, field);
+            }
         }
+        System.out.println("You've won :)");
     }
 
-    private static FigureCreator getCreator(int index) {
-        FigureCreator creator = null;
-        if (index == 0) {
-            creator = new CubeCreator();
-        }
-        return creator;
-    }
+
 }

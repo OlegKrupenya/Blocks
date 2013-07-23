@@ -20,9 +20,15 @@ public class Field {
     public static final int CREATE_FIGURE_LEFT_COORDINATE = 4;
 
     /**
-     * Is set to <code>true</code> when there is enough space to create a new figure.
+     * Is set to {@code true} when there is enough space to create a new figure.
      */
     private boolean hasSpace = true;
+
+    /**
+     *  Is set to {@code true} when it is possible to move the figure.
+     *  When it is {@code false}, the new figure will be created.
+     */
+    private boolean canMoveTheFigure = false;
 
     private int[][] data = new int[WIDTH][HEIGHT];
 
@@ -30,23 +36,12 @@ public class Field {
         clear();
     }
 
-    public void addFigureToField(Figure figure) {
-        int[][] figureData = figure.getData();
-        int figureWidth = figure.getWidth();
-        int figureHeight = figure.getHeight();
+    public int[][] getData() {
+        return data;
+    }
 
-        int dataI = 0;
-        int dataJ = CREATE_FIGURE_LEFT_COORDINATE;
-        for (int i = 0; i < figureWidth; i++) {
-            for (int j = 0; j < figureHeight; j++) {
-                data[dataI][dataJ] = figureData[i][j];
-                dataJ++;
-            }
-            dataJ = CREATE_FIGURE_LEFT_COORDINATE;
-            dataI++;
-        }
-        // REMOVE IMMEDIATELY!!!
-        hasSpace = false;
+    public void setData(int[][] data) {
+        this.data = data;
     }
 
     /**
@@ -57,6 +52,13 @@ public class Field {
      */
     public boolean isNotFull() {
         return hasSpace;
+    }
+
+    /**
+     *  @return {@code true} when it is possible to move the figure.
+     */
+    public boolean isCanMoveTheFigure() {
+        return canMoveTheFigure;
     }
 
     /**
