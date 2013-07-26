@@ -30,7 +30,7 @@ public class Executor {
                 figure = creator.createFigure();
                 manager.addFigureToField(figure, field);
                 field.showFieldData();
-            }  else {
+            } else {
                 manager.moveFigure(figure, field);
             }
         }

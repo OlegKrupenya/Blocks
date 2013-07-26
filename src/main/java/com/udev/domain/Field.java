@@ -24,8 +24,8 @@ public class Field {
     private boolean hasSpace = true;
 
     /**
-     *  Is set to {@code true} when it is possible to move the figure.
-     *  When it is {@code false}, the new figure will be created.
+     * Is set to {@code true} when it is possible to move the figure.
+     * When it is {@code false}, the new figure will be created.
      */
     private boolean canMoveTheFigure = false;
 
@@ -54,14 +54,14 @@ public class Field {
     }
 
     /**
-     *  @return {@code true} when it is possible to move the figure.
+     * @return {@code true} when it is possible to move the figure.
      */
     public boolean isCanMoveTheFigure() {
         return canMoveTheFigure;
     }
 
     /**
-     *  Logs the current state of the data
+     * Logs the current state of the data
      */
     public void showFieldData() {
         logger.debug("\n\n The data:");

@@ -2,6 +2,8 @@ package com.udev.domain.figures;
 
 import com.udev.domain.Field;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -24,6 +26,12 @@ public class Cube implements Figure {
     @Override
     public int[][] getData() {
         return this.data;
+    }
+
+    @Override
+    public List<Cell> getCells() {
+        // TODO: Implement the method.
+        return null;
     }
 
     @Override
