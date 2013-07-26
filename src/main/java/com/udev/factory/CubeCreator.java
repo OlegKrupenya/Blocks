@@ -1,7 +1,7 @@
 package com.udev.factory;
 
-import com.udev.figures.Cube;
-import com.udev.figures.Figure;
+import com.udev.domain.figures.Cube;
+import com.udev.domain.figures.Figure;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,9 +1,8 @@
 package com.udev.process;
 
-import com.udev.factory.CubeCreator;
 import com.udev.factory.FigureCreator;
-import com.udev.field.Field;
-import com.udev.figures.Figure;
+import com.udev.domain.Field;
+import com.udev.domain.figures.Figure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

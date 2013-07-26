@@ -1,6 +1,5 @@
-package com.udev.field;
+package com.udev.domain;
 
-import com.udev.figures.Figure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

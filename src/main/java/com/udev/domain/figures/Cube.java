@@ -1,6 +1,6 @@
-package com.udev.figures;
+package com.udev.domain.figures;
 
-import com.udev.field.Field;
+import com.udev.domain.Field;
 
 /**
  * Created with IntelliJ IDEA.

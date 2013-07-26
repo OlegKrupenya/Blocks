@@ -1,4 +1,4 @@
-package com.udev.figures;
+package com.udev.domain.figures;
 
 /**
  * Created with IntelliJ IDEA.
