@@ -1,5 +1,6 @@
 package com.udev.domain;
 
+import com.udev.domain.figures.Cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,35 +13,62 @@ import org.slf4j.LoggerFactory;
  */
 public class Field {
 
-    private static final Logger logger = LoggerFactory.getLogger(Field.class);
-
-    public static final int WIDTH = 20;
-    public static final int HEIGHT = 10;
+    /** Left coordinate of the figure when it is added on the field. */
     public static final int CREATE_FIGURE_LEFT_COORDINATE = 4;
 
-    /**
-     * Is set to {@code true} when there is enough space to create a new figure.
-     */
+    /** Height of the field. */
+    public static final int HEIGHT = 10;
+
+    /** Width of the field. */
+    public static final int WIDTH = 20;
+
+    /** Initial value of the field is 0 (empty). */
+    private static final byte INIT_VALUE = 0;
+
+    /** Logger. **/
+    private static final Logger logger = LoggerFactory.getLogger(Field.class);
+
+    /** Is set to {@code true} when there is enough space to create a new figure. */
     private boolean hasSpace = true;
 
     /**
      * Is set to {@code true} when it is possible to move the figure.
      * When it is {@code false}, the new figure will be created.
      */
-    private boolean canMoveTheFigure = false;
+    private boolean possibleMoveFigure = false;
 
-    private int[][] data = new int[WIDTH][HEIGHT];
+    /** Data of the field. */
+    private Cell[][] cells = new Cell[WIDTH][HEIGHT];
 
+
+    /**
+     * Constructor.
+     */
     public Field() {
-        clear();
+        init();
     }
 
-    public int[][] getData() {
-        return data;
+    /**
+     *
+     * @return
+     */
+    public Cell[][] getCells() {
+        return cells;
     }
 
-    public void setData(int[][] data) {
-        this.data = data;
+    /**
+     *
+     * @param cells
+     */
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
+    }
+
+    /**
+     * @return {@code true} when it is possible to move the figure.
+     */
+    public boolean isPossibleMoveFigure() {
+        return possibleMoveFigure;
     }
 
     /**
@@ -54,21 +82,14 @@ public class Field {
     }
 
     /**
-     * @return {@code true} when it is possible to move the figure.
-     */
-    public boolean isCanMoveTheFigure() {
-        return canMoveTheFigure;
-    }
-
-    /**
      * Logs the current state of the data
      */
-    public void showFieldData() {
+    public void showData() {
         logger.debug("\n\n The data:");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                sb.append(data[i][j] + " ");
+                sb.append(cells[i][j].getData() + " ");
             }
             sb.append("\n");
         }
@@ -81,7 +102,25 @@ public class Field {
     private void clear() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                data[i][j] = 0;
+                Cell cell =  cells[i][j];
+                cell.setI(i);
+                cell.setJ(j);
+                cell.setData(INIT_VALUE);
+            }
+        }
+    }
+
+    /**
+     * Initialize the cells
+     */
+    private void init() {
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                Cell cell =  new Cell();
+                cell.setI(i);
+                cell.setJ(j);
+                cell.setData(INIT_VALUE);
+                cells[i][j] = cell;
             }
         }
     }

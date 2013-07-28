@@ -11,13 +11,6 @@ import java.util.List;
  *         Time: 17:42
  */
 public interface Figure {
-    /**
-     * Use {@code getCells()} instead.
-     *
-     * @return internal representation of the figure
-     */
-    @Deprecated
-    public int[][] getData();
 
     /**
      * @return The internal representation of the figure.
@@ -36,5 +29,4 @@ public interface Figure {
 
     public void setHeight(int height);
 
-    public void setData(int[][] data);
 }

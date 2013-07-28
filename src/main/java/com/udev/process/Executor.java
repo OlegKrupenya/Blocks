@@ -24,14 +24,14 @@ public class Executor {
         FigureActionManager manager = new FigureActionManager();
         while (field.isNotFull()) {
             Figure figure = null;
-            if (field.isCanMoveTheFigure()) {
+            if (field.isPossibleMoveFigure()) {
+                manager.moveFigure(figure, field);
+            } else {
                 creator = manager.getCreator(0);
-                field.showFieldData();
+                field.showData();
                 figure = creator.createFigure();
                 manager.addFigureToField(figure, field);
-                field.showFieldData();
-            } else {
-                manager.moveFigure(figure, field);
+                field.showData();
             }
         }
         System.out.println("You've won :)");

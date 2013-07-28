@@ -2,6 +2,7 @@ package com.udev.domain.figures;
 
 import com.udev.domain.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +14,11 @@ import java.util.List;
  */
 public class Cube implements Figure {
     public static final int CUBE_HEIGHT = 2;
-    private int[][] data;
+    private static final byte CONTENT = 1;
     private int leftBorder;
     private int height;
     private int width;
+    private List<Cell> data;
 
     public Cube() {
         init();
@@ -24,14 +26,8 @@ public class Cube implements Figure {
 
 
     @Override
-    public int[][] getData() {
-        return this.data;
-    }
-
-    @Override
     public List<Cell> getCells() {
-        // TODO: Implement the method.
-        return null;
+        return this.data;
     }
 
     @Override
@@ -50,11 +46,6 @@ public class Cube implements Figure {
     }
 
     @Override
-    public void setData(int[][] data) {
-        this.data = data;
-    }
-
-    @Override
     public void setHeight(int height) {
         this.height = height;
     }
@@ -68,14 +59,18 @@ public class Cube implements Figure {
         this.height = CUBE_HEIGHT;
         this.width = CUBE_HEIGHT;
         this.leftBorder = Field.CREATE_FIGURE_LEFT_COORDINATE;
-        this.data = new int[CUBE_HEIGHT][CUBE_HEIGHT];
+        this.data = new ArrayList<>(4);
         clear();
     }
 
     private void clear() {
         for (int i = 0; i < CUBE_HEIGHT; i++) {
             for (int j = 0; j < CUBE_HEIGHT; j++) {
-                data[i][j] = 1;
+                Cell cell = new Cell();
+                cell.setData(CONTENT);
+                cell.setI(i);
+                cell.setJ(j + this.leftBorder);
+                data.add(cell);
             }
         }
     }
