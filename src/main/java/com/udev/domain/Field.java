@@ -23,7 +23,7 @@ public class Field {
     public static final int WIDTH = 20;
 
     /** Initial value of the field is 0 (empty). */
-    private static final byte INIT_VALUE = 0;
+    private static final byte ZERO = 0;
 
     /** Logger. **/
     private static final Logger logger = LoggerFactory.getLogger(Field.class);
@@ -81,6 +81,21 @@ public class Field {
         return hasSpace;
     }
 
+
+    /**
+     * Clears the com.udev.field
+     */
+    public void clear() {
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                Cell cell =  cells[i][j];
+                cell.setI(i);
+                cell.setJ(j);
+                cell.setData(ZERO);
+            }
+        }
+    }
+
     /**
      * Logs the current state of the data
      */
@@ -97,20 +112,6 @@ public class Field {
     }
 
     /**
-     * Clears the com.udev.field
-     */
-    private void clear() {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                Cell cell =  cells[i][j];
-                cell.setI(i);
-                cell.setJ(j);
-                cell.setData(INIT_VALUE);
-            }
-        }
-    }
-
-    /**
      * Initialize the cells
      */
     private void init() {
@@ -119,7 +120,7 @@ public class Field {
                 Cell cell =  new Cell();
                 cell.setI(i);
                 cell.setJ(j);
-                cell.setData(INIT_VALUE);
+                cell.setData(ZERO);
                 cells[i][j] = cell;
             }
         }

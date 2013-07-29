@@ -1,9 +1,18 @@
 package com.udev.process;
 
+import com.udev.domain.Field;
+import com.udev.domain.figures.Cell;
+import com.udev.domain.figures.Cube;
+import com.udev.domain.figures.Figure;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +23,9 @@ import org.junit.Test;
  */
 public class FigureActionManagerTest {
 
+    private static final byte ONE = 1;
     private FigureActionManager manager;
+    private Field field = new Field();
 
     @Before
     public void setUp() {
@@ -24,10 +35,81 @@ public class FigureActionManagerTest {
     @After
     public void tearDown() {
         this.manager = null;
+        this.field.clear();
     }
 
     @Test
     public void addFigureToFieldTest_hp() {
-        Assert.assertNotNull(this.manager.getCreator(0));
+        assertNotNull(this.manager.getCreator(0));
+    }
+
+    @Test
+    public void moveDownwardsTest_figureIsCreated_move() {
+        // given
+        Figure cube = new Cube();
+        this.manager.addFigureToField(cube, field);
+
+        Cell first = new Cell();
+        first.setData(ONE);
+        first.setI(1);
+        first.setJ(4);
+        Cell second = new Cell();
+        second.setData(ONE);
+        second.setI(1);
+        second.setJ(5);
+        Cell third = new Cell();
+        third.setData(ONE);
+        third.setI(2);
+        third.setJ(4);
+        Cell fourth = new Cell();
+        fourth.setData(ONE);
+        fourth.setI(2);
+        fourth.setJ(5);
+        List<Cell> expected = new ArrayList<>(4);
+        expected.add(first);
+        expected.add(second);
+        expected.add(third);
+        expected.add(fourth);
+
+        // do
+        this.manager.moveFigure(cube, field, FigureActionManager.Move.DOWN);
+
+        // verify
+        List<Cell> figureData = cube.getCells();
+        assertNotNull(figureData);
+        assertEquals(4, figureData.size());
+        assertTrue(figureData.containsAll(expected));
+
+        int size = 0;
+        for (int i = 0; i < Field.WIDTH; i++) {
+            for (int j = 0; j < Field.HEIGHT; j++) {
+                Cell cell =  this.field.getCells()[i][j];
+                if (expected.contains(cell)) {
+                    size++;
+                }
+                else {
+                    assertFalse(cell.getData() == ONE);
+                    assertFalse(cell.getI() == 1 && cell.getJ() == 4);
+                    assertFalse(cell.getI() == 1 && cell.getJ() == 5);
+                    assertFalse(cell.getI() == 2 && cell.getJ() == 4);
+                    assertFalse(cell.getI() == 2 && cell.getJ() == 5);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void moveDownwardsTest_figureIsInMiddle_move() {
+
+    }
+
+    @Test
+    public void moveDownwardsTest_figureIsAtMiddle_cannotMove() {
+
+    }
+
+    @Test
+    public void moveDownwardsTest_figureIsAtBottom_cannotMove() {
+
     }
 }

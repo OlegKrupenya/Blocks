@@ -22,6 +22,44 @@ public class Cell {
     private byte data;
 
     /**
+     * Constructor.
+     */
+    public Cell() {
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cell cell = (Cell) o;
+
+        if (data != cell.data) return false;
+        if (i != cell.i) return false;
+        if (j != cell.j) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = i;
+        result = 31 * result + j;
+        result = 31 * result + (int) data;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "i=" + i +
+                ", j=" + j +
+                ", data=" + data +
+                '}';
+    }
+
+    /**
      * @return  Left index in the field.
      */
     public int getI() {
@@ -70,4 +108,5 @@ public class Cell {
         }
         this.data = data;
     }
+
 }

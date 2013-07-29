@@ -25,7 +25,7 @@ public class Executor {
         while (field.isNotFull()) {
             Figure figure = null;
             if (field.isPossibleMoveFigure()) {
-                manager.moveFigure(figure, field);
+                manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
             } else {
                 creator = manager.getCreator(0);
                 field.showData();
