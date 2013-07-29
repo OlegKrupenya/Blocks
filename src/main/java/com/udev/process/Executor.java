@@ -36,6 +36,4 @@ public class Executor {
         }
         System.out.println("You've won :)");
     }
-
-
 }
