@@ -84,11 +84,10 @@ public class FigureActionManagerTest {
         int size = 0;
         for (int i = 0; i < Field.WIDTH; i++) {
             for (int j = 0; j < Field.HEIGHT; j++) {
-                Cell cell =  this.field.getCells()[i][j];
+                Cell cell = this.field.getCells()[i][j];
                 if (expected.contains(cell)) {
                     size++;
-                }
-                else {
+                } else {
                     assertFalse(cell.getData() == ONE);
                     assertFalse(cell.getI() == 1 && cell.getJ() == 4);
                     assertFalse(cell.getI() == 1 && cell.getJ() == 5);
@@ -132,7 +131,7 @@ public class FigureActionManagerTest {
         initial.add(thirdBefore);
         initial.add(fourthBefore);
         cube.setCells(initial);
-        Cell [][] cells = field.getCells();
+        Cell[][] cells = field.getCells();
         cells[7][4] = firstBefore;
         cells[7][5] = secondBefore;
         cells[8][4] = thirdBefore;
@@ -173,11 +172,10 @@ public class FigureActionManagerTest {
         int size = 0;
         for (int i = 0; i < Field.WIDTH; i++) {
             for (int j = 0; j < Field.HEIGHT; j++) {
-                Cell cell =  this.field.getCells()[i][j];
+                Cell cell = this.field.getCells()[i][j];
                 if (expected.contains(cell)) {
                     size++;
-                }
-                else {
+                } else {
                     assertFalse(cell.getData() == ONE);
                     assertFalse(cell.getI() == 8 && cell.getJ() == 4);
                     assertFalse(cell.getI() == 8 && cell.getJ() == 5);
@@ -221,7 +219,7 @@ public class FigureActionManagerTest {
         initial.add(thirdBefore);
         initial.add(fourthBefore);
         cube.setCells(initial);
-        Cell [][] cells = field.getCells();
+        Cell[][] cells = field.getCells();
         cells[7][4] = firstBefore;
         cells[7][5] = secondBefore;
         cells[8][4] = thirdBefore;
@@ -229,7 +227,7 @@ public class FigureActionManagerTest {
 
         for (int i = 8; i < Field.WIDTH; i++) {
             for (int j = 0; j < Field.HEIGHT; j++) {
-                Cell cell =  this.field.getCells()[i][j];
+                Cell cell = this.field.getCells()[i][j];
                 cell.setData(ONE);
                 cell.setI(i);
                 cell.setJ(j);
@@ -248,13 +246,13 @@ public class FigureActionManagerTest {
         Cell[][] afterData = this.field.getCells();
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < Field.HEIGHT; j++) {
-                Cell cell =  this.field.getCells()[i][j];
+                Cell cell = this.field.getCells()[i][j];
                 assertEquals(ZERO, cell.getData());
             }
         }
         for (int i = 8; i < Field.HEIGHT; i++) {
             for (int j = 0; j < Field.HEIGHT; j++) {
-                Cell cell =  this.field.getCells()[i][j];
+                Cell cell = this.field.getCells()[i][j];
                 assertEquals(ONE, cell.getData());
             }
         }
@@ -290,7 +288,7 @@ public class FigureActionManagerTest {
         initial.add(thirdBefore);
         initial.add(fourthBefore);
         cube.setCells(initial);
-        Cell [][] cells = field.getCells();
+        Cell[][] cells = field.getCells();
         cells[18][4] = firstBefore;
         cells[18][5] = secondBefore;
         cells[19][4] = thirdBefore;
