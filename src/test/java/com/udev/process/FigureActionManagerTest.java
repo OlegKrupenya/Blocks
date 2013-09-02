@@ -264,6 +264,42 @@ public class FigureActionManagerTest {
 
     @Test
     public void moveDownwardsTest_figureIsAtBottom_cannotMove() {
+        // given
+        Figure cube = new Cube();
 
+        // initial
+        Cell firstBefore = new Cell();
+        firstBefore.setData(ONE);
+        firstBefore.setI(7);
+        firstBefore.setJ(4);
+        Cell secondBefore = new Cell();
+        secondBefore.setData(ONE);
+        secondBefore.setI(7);
+        secondBefore.setJ(5);
+        Cell thirdBefore = new Cell();
+        thirdBefore.setData(ONE);
+        thirdBefore.setI(8);
+        thirdBefore.setJ(4);
+        Cell fourthBefore = new Cell();
+        fourthBefore.setData(ONE);
+        fourthBefore.setI(8);
+        fourthBefore.setJ(5);
+        List<Cell> initial = new ArrayList<>(4);
+        initial.add(firstBefore);
+        initial.add(secondBefore);
+        initial.add(thirdBefore);
+        initial.add(fourthBefore);
+        cube.setCells(initial);
+        Cell [][] cells = field.getCells();
+        cells[18][4] = firstBefore;
+        cells[18][5] = secondBefore;
+        cells[19][4] = thirdBefore;
+        cells[19][5] = fourthBefore;
+
+        // do
+        this.manager.moveFigure(cube, field, FigureActionManager.Move.DOWN);
+
+        assertFalse(this.field.isNotFull());
+        assertFalse(this.field.isPossibleMoveFigure());
     }
 }
