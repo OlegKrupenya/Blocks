@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 public class FigureActionManagerTest {
 
     private static final byte ONE = 1;
+    private static final byte ZERO = 0;
     private FigureActionManager manager;
     private Field field = new Field();
 
@@ -96,11 +97,96 @@ public class FigureActionManagerTest {
                 }
             }
         }
+        Cell[][] data = this.field.getCells();
+        assertTrue(data[0][4].getData() == ZERO);
+        assertTrue(data[0][5].getData() == ZERO);
     }
 
     @Test
     public void moveDownwardsTest_figureIsInMiddle_move() {
+        // given
+        Figure cube = new Cube();
 
+        // initial
+        Cell firstBefore = new Cell();
+        firstBefore.setData(ONE);
+        firstBefore.setI(7);
+        firstBefore.setJ(4);
+        Cell secondBefore = new Cell();
+        secondBefore.setData(ONE);
+        secondBefore.setI(7);
+        secondBefore.setJ(5);
+        Cell thirdBefore = new Cell();
+        thirdBefore.setData(ONE);
+        thirdBefore.setI(8);
+        thirdBefore.setJ(4);
+        Cell fourthBefore = new Cell();
+        fourthBefore.setData(ONE);
+        fourthBefore.setI(8);
+        fourthBefore.setJ(5);
+        List<Cell> initial = new ArrayList<>(4);
+        initial.add(firstBefore);
+        initial.add(secondBefore);
+        initial.add(thirdBefore);
+        initial.add(fourthBefore);
+        cube.setCells(initial);
+        Cell [][] cells = field.getCells();
+        cells[7][4] = firstBefore;
+        cells[7][5] = secondBefore;
+        cells[8][4] = thirdBefore;
+        cells[8][5] = fourthBefore;
+
+
+        Cell first = new Cell();
+        first.setData(ONE);
+        first.setI(8);
+        first.setJ(4);
+        Cell second = new Cell();
+        second.setData(ONE);
+        second.setI(8);
+        second.setJ(5);
+        Cell third = new Cell();
+        third.setData(ONE);
+        third.setI(9);
+        third.setJ(4);
+        Cell fourth = new Cell();
+        fourth.setData(ONE);
+        fourth.setI(9);
+        fourth.setJ(5);
+        List<Cell> expected = new ArrayList<>(4);
+        expected.add(first);
+        expected.add(second);
+        expected.add(third);
+        expected.add(fourth);
+
+        // do
+        this.manager.moveFigure(cube, field, FigureActionManager.Move.DOWN);
+
+        // verify
+        List<Cell> figureData = cube.getCells();
+        assertNotNull(figureData);
+        assertEquals(4, figureData.size());
+        assertTrue(figureData.containsAll(expected));
+
+        int size = 0;
+        for (int i = 0; i < Field.WIDTH; i++) {
+            for (int j = 0; j < Field.HEIGHT; j++) {
+                Cell cell =  this.field.getCells()[i][j];
+                if (expected.contains(cell)) {
+                    size++;
+                }
+                else {
+                    assertFalse(cell.getData() == ONE);
+                    assertFalse(cell.getI() == 8 && cell.getJ() == 4);
+                    assertFalse(cell.getI() == 8 && cell.getJ() == 5);
+                    assertFalse(cell.getI() == 9 && cell.getJ() == 4);
+                    assertFalse(cell.getI() == 9 && cell.getJ() == 5);
+                }
+            }
+        }
+        Cell[][] data = this.field.getCells();
+        assertTrue(data[7][4].getData() == ZERO);
+        assertTrue(data[7][5].getData() == ZERO);
     }
 
     @Test

@@ -18,7 +18,7 @@ public class Cube implements Figure {
     private int leftBorder;
     private int height;
     private int width;
-    private List<Cell> data;
+    private List<Cell> cells;
 
     public Cube() {
         init();
@@ -27,7 +27,11 @@ public class Cube implements Figure {
 
     @Override
     public List<Cell> getCells() {
-        return this.data;
+        return this.cells;
+    }
+
+    public void setCells(List<Cell> cells) {
+        this.cells = cells;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class Cube implements Figure {
         this.height = CUBE_HEIGHT;
         this.width = CUBE_HEIGHT;
         this.leftBorder = Field.CREATE_FIGURE_LEFT_COORDINATE;
-        this.data = new ArrayList<>(4);
+        this.cells = new ArrayList<>(4);
         clear();
     }
 
@@ -70,7 +74,7 @@ public class Cube implements Figure {
                 cell.setData(CONTENT);
                 cell.setI(i);
                 cell.setJ(j + this.leftBorder);
-                data.add(cell);
+                cells.add(cell);
             }
         }
     }

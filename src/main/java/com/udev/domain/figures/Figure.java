@@ -19,6 +19,15 @@ public interface Figure {
      */
     public List<Cell> getCells();
 
+    /**
+     * Allows to set the internal representation of the figure.
+     *
+     * @param cells The internal representation of the figure.
+     *              It consist of the list of cells that have data and position
+     *              of the cell on the field.
+     */
+    public void setCells(List<Cell> cells);
+
     public int getLeftBorder();
 
     public int getWidth();
