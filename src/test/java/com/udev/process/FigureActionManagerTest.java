@@ -100,6 +100,8 @@ public class FigureActionManagerTest {
         Cell[][] data = this.field.getCells();
         assertTrue(data[0][4].getData() == ZERO);
         assertTrue(data[0][5].getData() == ZERO);
+        assertTrue(this.field.isNotFull());
+        assertTrue(this.field.isPossibleMoveFigure());
     }
 
     @Test
@@ -187,6 +189,8 @@ public class FigureActionManagerTest {
         Cell[][] data = this.field.getCells();
         assertTrue(data[7][4].getData() == ZERO);
         assertTrue(data[7][5].getData() == ZERO);
+        assertTrue(this.field.isNotFull());
+        assertTrue(this.field.isPossibleMoveFigure());
     }
 
     @Test
