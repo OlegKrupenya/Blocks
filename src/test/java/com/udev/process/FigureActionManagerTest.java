@@ -195,7 +195,71 @@ public class FigureActionManagerTest {
 
     @Test
     public void moveDownwardsTest_figureIsAtMiddle_cannotMove() {
+        // given
+        Figure cube = new Cube();
 
+        // initial
+        Cell firstBefore = new Cell();
+        firstBefore.setData(ONE);
+        firstBefore.setI(7);
+        firstBefore.setJ(4);
+        Cell secondBefore = new Cell();
+        secondBefore.setData(ONE);
+        secondBefore.setI(7);
+        secondBefore.setJ(5);
+        Cell thirdBefore = new Cell();
+        thirdBefore.setData(ONE);
+        thirdBefore.setI(8);
+        thirdBefore.setJ(4);
+        Cell fourthBefore = new Cell();
+        fourthBefore.setData(ONE);
+        fourthBefore.setI(8);
+        fourthBefore.setJ(5);
+        List<Cell> initial = new ArrayList<>(4);
+        initial.add(firstBefore);
+        initial.add(secondBefore);
+        initial.add(thirdBefore);
+        initial.add(fourthBefore);
+        cube.setCells(initial);
+        Cell [][] cells = field.getCells();
+        cells[7][4] = firstBefore;
+        cells[7][5] = secondBefore;
+        cells[8][4] = thirdBefore;
+        cells[8][5] = fourthBefore;
+
+        for (int i = 8; i < Field.WIDTH; i++) {
+            for (int j = 0; j < Field.HEIGHT; j++) {
+                Cell cell =  this.field.getCells()[i][j];
+                cell.setData(ONE);
+                cell.setI(i);
+                cell.setJ(j);
+            }
+        }
+
+        // do
+        this.manager.moveFigure(cube, field, FigureActionManager.Move.DOWN);
+
+        // verify
+        List<Cell> figureData = cube.getCells();
+        assertNotNull(figureData);
+        assertEquals(4, figureData.size());
+        assertFalse(figureData.containsAll(initial));
+
+        Cell[][] afterData = this.field.getCells();
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < Field.HEIGHT; j++) {
+                Cell cell =  this.field.getCells()[i][j];
+                assertEquals(ZERO, cell.getData());
+            }
+        }
+        for (int i = 8; i < Field.HEIGHT; i++) {
+            for (int j = 0; j < Field.HEIGHT; j++) {
+                Cell cell =  this.field.getCells()[i][j];
+                assertEquals(ONE, cell.getData());
+            }
+        }
+        assertFalse(this.field.isNotFull());
+        assertFalse(this.field.isPossibleMoveFigure());
     }
 
     @Test
