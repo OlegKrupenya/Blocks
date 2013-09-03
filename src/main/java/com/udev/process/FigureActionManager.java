@@ -68,6 +68,7 @@ public class FigureActionManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         for (Cell cell : cells) {
+            // TODO: Add to the condition: if the value == 1 and !figure.contains(cell)
             if (cell.getI() == Field.HEIGHT - 1 || data[cell.getI() + 1][cell.getJ()].getData() == Field.ONE) {
                 canMove = false;
                 break;
