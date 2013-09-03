@@ -20,13 +20,21 @@ public class FigureActionManager {
      * Determines direction to move a figure
      */
     public enum Move {
-        /** The user has pressed the key Left. */
+        /**
+         * The user has pressed the key Left.
+         */
         LEFT,
-        /** The user has pressed the key Right. */
+        /**
+         * The user has pressed the key Right.
+         */
         RIGHT,
-        /** Usual movement downwards by timer. */
+        /**
+         * Usual movement downwards by timer.
+         */
         DOWN,
-        /** Speeds up the movement downwards, the user pressed key down.**/
+        /**
+         * Speeds up the movement downwards, the user pressed key down.*
+         */
         FAST_DOWN
     }
 
@@ -48,17 +56,60 @@ public class FigureActionManager {
         }
     }
 
+    /**
+     * Returns {@code true} if it is possible to move the figure downwards.
+     *
+     * @param figure The figure to move
+     * @param field  The field
+     * @return {@code true} if it is possible to move the figure downwards.
+     */
+    public boolean isPossibleToMoveTheFigureDownwards(Figure figure, Field field) {
+        boolean canMove = true;
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
+        for (Cell cell : cells) {
+            if (cell.getI() == Field.HEIGHT - 1 || data[cell.getI() + 1][cell.getJ()].getData() == Field.ONE) {
+                canMove = false;
+                break;
+            }
+        }
+        field.setPossibleMoveFigure(canMove);
+        return canMove;
+    }
+
+    /**
+     * Move the figure in required direction.
+     *
+     * @param figure    The figure to move
+     * @param field     The field
+     * @param direction The direction to move.
+     */
     public void moveFigure(Figure figure, Field field, Move direction) {
         switch (direction) {
             case DOWN: {
-                 moveFigureDownDownwards(figure, field);
+                moveFigureDownDownwards(figure, field);
                 break;
             }
         }
     }
 
+    /**
+     * Move the figure downwards.
+     *
+     * @param figure The figure to move.
+     * @param field  The field.
+     */
     private void moveFigureDownDownwards(Figure figure, Field field) {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
+        for (Iterator<Cell> iterator = cells.iterator(); iterator.hasNext(); ) {
+            Cell cell = iterator.next();
+            if (isPossibleToMoveTheFigureDownwards(figure, field)) {
+                data[cell.getI()][cell.getJ()].setData(Field.ZERO);
+                data[cell.getI() + 1][cell.getJ()].setData(Field.ONE);
+                int index = cell.getI();
+                cell.setI(index++);
+            }
+        }
     }
 }

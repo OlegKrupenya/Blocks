@@ -22,8 +22,8 @@ public class Executor {
         Field field = new Field();
         FigureCreator creator = null;
         FigureActionManager manager = new FigureActionManager();
+        Figure figure = null;
         while (field.isNotFull()) {
-            Figure figure = null;
             if (field.isPossibleMoveFigure()) {
                 manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
             } else {
@@ -31,8 +31,9 @@ public class Executor {
                 field.showData();
                 figure = creator.createFigure();
                 manager.addFigureToField(figure, field);
-                field.showData();
+                field.setPossibleMoveFigure(true);
             }
+            field.showData();
         }
         System.out.println("You've won :)");
     }

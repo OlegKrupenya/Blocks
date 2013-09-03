@@ -13,22 +13,39 @@ import org.slf4j.LoggerFactory;
  */
 public class Field {
 
-    /** Left coordinate of the figure when it is added on the field. */
+    /**
+     * Left coordinate of the figure when it is added on the field.
+     */
     public static final int CREATE_FIGURE_LEFT_COORDINATE = 4;
 
-    /** Height of the field. */
+    /**
+     * Height of the field.
+     */
     public static final int HEIGHT = 10;
 
-    /** Width of the field. */
+    /**
+     * Width of the field.
+     */
     public static final int WIDTH = 20;
 
-    /** Initial value of the field is 0 (empty). */
-    private static final byte ZERO = 0;
+    /**
+     * The value of the field is 1 (busy).
+     */
+    public static final byte ONE = 0;
 
-    /** Logger. **/
+    /**
+     * Initial value of the field is 0 (empty).
+     */
+    public static final byte ZERO = 0;
+
+    /**
+     * Logger. *
+     */
     private static final Logger logger = LoggerFactory.getLogger(Field.class);
 
-    /** Is set to {@code true} when there is enough space to create a new figure. */
+    /**
+     * Is set to {@code true} when there is enough space to create a new figure.
+     */
     private boolean hasSpace = true;
 
     /**
@@ -37,7 +54,9 @@ public class Field {
      */
     private boolean possibleMoveFigure = false;
 
-    /** Data of the field. */
+    /**
+     * Data of the field.
+     */
     private Cell[][] cells = new Cell[WIDTH][HEIGHT];
 
 
@@ -49,7 +68,6 @@ public class Field {
     }
 
     /**
-     *
      * @return
      */
     public Cell[][] getCells() {
@@ -57,7 +75,6 @@ public class Field {
     }
 
     /**
-     *
      * @param cells
      */
     public void setCells(Cell[][] cells) {
@@ -69,6 +86,15 @@ public class Field {
      */
     public boolean isPossibleMoveFigure() {
         return possibleMoveFigure;
+    }
+
+    /**
+     * Sets possibleMoveFigure
+     *
+     * @param possibleMoveFigure Is {@code true} when it is possible to move the figure.
+     */
+    public void setPossibleMoveFigure(boolean possibleMoveFigure) {
+        this.possibleMoveFigure = possibleMoveFigure;
     }
 
     /**
@@ -88,7 +114,7 @@ public class Field {
     public void clear() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                Cell cell =  cells[i][j];
+                Cell cell = cells[i][j];
                 cell.setI(i);
                 cell.setJ(j);
                 cell.setData(ZERO);
@@ -117,7 +143,7 @@ public class Field {
     private void init() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                Cell cell =  new Cell();
+                Cell cell = new Cell();
                 cell.setI(i);
                 cell.setJ(j);
                 cell.setData(ZERO);
