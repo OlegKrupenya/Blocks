@@ -6,6 +6,7 @@ import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -48,5 +49,16 @@ public class FigureActionManager {
     }
 
     public void moveFigure(Figure figure, Field field, Move direction) {
+        switch (direction) {
+            case DOWN: {
+                 moveFigureDownDownwards(figure, field);
+                break;
+            }
+        }
+    }
+
+    private void moveFigureDownDownwards(Figure figure, Field field) {
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
     }
 }
