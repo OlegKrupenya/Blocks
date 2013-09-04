@@ -59,6 +59,16 @@ public class Cube implements Figure {
         this.width = width;
     }
 
+    @Override
+    public boolean contains(Cell obj) {
+        for (Cell cell : this.getCells()) {
+            if (cell.equals(obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void init() {
         this.height = CUBE_HEIGHT;
         this.width = CUBE_HEIGHT;

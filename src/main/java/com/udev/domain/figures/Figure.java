@@ -38,4 +38,6 @@ public interface Figure {
 
     public void setHeight(int height);
 
+    public boolean contains(Cell cell);
+
 }
