@@ -6,6 +6,7 @@ import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +69,8 @@ public class FigureActionManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         for (Cell cell : cells) {
-            if (cell.getI() == Field.HEIGHT - 1 || (data[cell.getI() + 1][cell.getJ()].getData() == Field.ONE
-                    && !figure.contains(data[cell.getI() + 1][cell.getJ()]))) {
+            if (!(cell.getI() != Field.HEIGHT - 1 && (data[cell.getI() + 1][cell.getJ()].getData() == Field.ZERO
+                    || figure.contains(data[cell.getI() + 1][cell.getJ()])))) {
                 canMove = false;
                 break;
             }
@@ -103,13 +104,18 @@ public class FigureActionManager {
     private void moveFigureDownDownwards(Figure figure, Field field) {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
-        for (Iterator<Cell> iterator = cells.iterator(); iterator.hasNext(); ) {
-            Cell cell = iterator.next();
-            if (isPossibleToMoveTheFigureDownwards(figure, field)) {
-                data[cell.getI()][cell.getJ()].setData(Field.ZERO);
+        List<Cell> alreadyMovedCells = new ArrayList<>(figure.getCells().size());
+        if (isPossibleToMoveTheFigureDownwards(figure, field)) {
+            for (Iterator<Cell> iterator = cells.iterator(); iterator.hasNext(); ) {
+                Cell cell = iterator.next();
+                if (!alreadyMovedCells.contains(cell)) {
+                    data[cell.getI()][cell.getJ()].setData(Field.ZERO);
+                }
                 data[cell.getI() + 1][cell.getJ()].setData(Field.ONE);
-                int index = cell.getI();
-                cell.setI(index++);
+//                int index = cell.getI();
+//                cell.setI(index + 1);
+                cell = data[cell.getI() + 1][cell.getJ()];
+                alreadyMovedCells.add(data[cell.getI()][cell.getJ()]);
             }
         }
     }

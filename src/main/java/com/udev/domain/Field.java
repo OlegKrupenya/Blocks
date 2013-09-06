@@ -31,7 +31,7 @@ public class Field {
     /**
      * The value of the field is 1 (busy).
      */
-    public static final byte ONE = 0;
+    public static final byte ONE = 1;
 
     /**
      * Initial value of the field is 0 (empty).
