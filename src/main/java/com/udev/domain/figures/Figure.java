@@ -40,4 +40,5 @@ public interface Figure {
 
     public boolean contains(Cell cell);
 
+    public void clear();
 }

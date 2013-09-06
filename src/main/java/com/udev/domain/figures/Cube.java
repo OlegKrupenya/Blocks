@@ -3,6 +3,7 @@ package com.udev.domain.figures;
 import com.udev.domain.Field;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,6 +70,11 @@ public class Cube implements Figure {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return cells.toString();
+    }
+
     private void init() {
         this.height = CUBE_HEIGHT;
         this.width = CUBE_HEIGHT;
@@ -77,7 +83,7 @@ public class Cube implements Figure {
         clear();
     }
 
-    private void clear() {
+    public void clear() {
         for (int i = 0; i < CUBE_HEIGHT; i++) {
             for (int j = 0; j < CUBE_HEIGHT; j++) {
                 Cell cell = new Cell();

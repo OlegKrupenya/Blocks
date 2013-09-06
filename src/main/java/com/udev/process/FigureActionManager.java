@@ -5,6 +5,8 @@ import com.udev.factory.CubeCreator;
 import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +18,8 @@ import java.util.List;
  * Time: 7:41 PM
  */
 public class FigureActionManager {
+
+    private static final Logger logger = LoggerFactory.getLogger(FigureActionManager.class);
 
     /**
      * Determines direction to move a figure
@@ -69,7 +73,8 @@ public class FigureActionManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         for (Cell cell : cells) {
-            if (!(cell.getI() != Field.HEIGHT - 1 && (data[cell.getI() + 1][cell.getJ()].getData() == Field.ZERO
+            // TODO: HEIGHT should be here!!!!
+            if (!(cell.getI() != 19 && (data[cell.getI() + 1][cell.getJ()].getData() == Field.ZERO
                     || figure.contains(data[cell.getI() + 1][cell.getJ()])))) {
                 canMove = false;
                 break;
@@ -112,11 +117,10 @@ public class FigureActionManager {
                     data[cell.getI()][cell.getJ()].setData(Field.ZERO);
                 }
                 data[cell.getI() + 1][cell.getJ()].setData(Field.ONE);
-//                int index = cell.getI();
-//                cell.setI(index + 1);
-                cell = data[cell.getI() + 1][cell.getJ()];
-                alreadyMovedCells.add(data[cell.getI()][cell.getJ()]);
+                alreadyMovedCells.add(data[cell.getI()+1][cell.getJ()]);
             }
+            figure.setCells(alreadyMovedCells);
+            logger.debug("The figure has been moved downwards:\n" + figure + "\n");
         }
     }
 }
