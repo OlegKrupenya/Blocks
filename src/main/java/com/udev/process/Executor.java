@@ -6,6 +6,8 @@ import com.udev.domain.figures.Figure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -25,7 +27,17 @@ public class Executor {
         Figure figure = null;
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
-                manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
+                try {
+                    int ch = System.in.read();
+                    while (ch == 49) {
+                        manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+                        ch = System.in.read();
+                    }
+                    manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
+                } catch (IOException e) {
+                    logger.error("Error during reading the input data.");
+                    break;
+                }
             } else {
                 creator = manager.getCreator(0);
                 field.showData();
