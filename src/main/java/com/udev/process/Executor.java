@@ -28,6 +28,7 @@ public class Executor {
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
                 try {
+                    // TODO: Fix reading of the input data.
                     int ch = System.in.read();
                     while (ch == 49) {
                         manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
