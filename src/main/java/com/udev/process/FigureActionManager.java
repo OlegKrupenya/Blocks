@@ -106,6 +106,27 @@ public class FigureActionManager {
     }
 
     /**
+     * Returns {@code true} if it is possible to move the figure left.
+     *
+     * @param figure The figure to move
+     * @param field  The field
+     * @return {@code true} if it is possible to move the figure left.
+     */
+    public boolean isPossibleToMoveTheFigureRight(Figure figure, Field field) {
+        boolean canMove = true;
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
+        for (Cell cell : cells) {
+            if (!(cell.getJ() != 9) && (data[cell.getI()][cell.getJ() + 1].getData() == Field.ZERO
+                    || figure.contains(data[cell.getI()][cell.getJ() + 1]))) {
+                canMove = false;
+                break;
+            }
+        }
+        return canMove;
+    }
+
+    /**
      * Move the figure in required direction.
      *
      * @param figure    The figure to move
@@ -121,6 +142,9 @@ public class FigureActionManager {
             case LEFT: {
                 moveFigureLeft(figure, field);
                 break;
+            }
+            case RIGHT: {
+
             }
         }
     }
@@ -167,6 +191,30 @@ public class FigureActionManager {
                 }
                 data[cell.getI()][cell.getJ() - 1].setData(Field.ONE);
                 alreadyMovedCells.add(data[cell.getI()][cell.getJ() - 1]);
+            }
+            figure.setCells(alreadyMovedCells);
+            logger.debug("The figure has been moved left:\n" + figure + "\n");
+        }
+    }
+
+    /**
+     * Moves the figure right.
+     *
+     * @param figure The figure to move.
+     * @param field  The field.
+     */
+    private void moveFigureRight(Figure figure, Field field) {
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
+        List<Cell> alreadyMovedCells = new ArrayList<>(figure.getCells().size());
+        if (isPossibleToMoveTheFigureLeft(figure, field)) {
+            for (Iterator<Cell> iterator = cells.iterator(); iterator.hasNext(); ) {
+                Cell cell = iterator.next();
+                if (!alreadyMovedCells.contains(cell)) {
+                    data[cell.getI()][cell.getJ()].setData(Field.ZERO);
+                }
+                data[cell.getI()][cell.getJ() + 1].setData(Field.ONE);
+                alreadyMovedCells.add(data[cell.getI()][cell.getJ() + 1]);
             }
             figure.setCells(alreadyMovedCells);
             logger.debug("The figure has been moved left:\n" + figure + "\n");
