@@ -68,14 +68,15 @@ public class Field {
     }
 
     /**
-     * @return
+     * @return Data of the field.
      */
     public Cell[][] getCells() {
         return cells;
     }
 
     /**
-     * @param cells
+     * Sets data of the field.
+     * @param cells Data of the field.
      */
     public void setCells(Cell[][] cells) {
         this.cells = cells;
