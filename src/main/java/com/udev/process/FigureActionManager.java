@@ -144,7 +144,8 @@ public class FigureActionManager {
                 break;
             }
             case RIGHT: {
-
+                moveFigureRight(figure, field);
+                break;
             }
         }
     }
