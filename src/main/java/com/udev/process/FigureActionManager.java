@@ -96,8 +96,8 @@ public class FigureActionManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         for (Cell cell : cells) {
-            if (!(cell.getJ() != 0) && (data[cell.getI()][cell.getJ() - 1].getData() == Field.ZERO
-                    || figure.contains(data[cell.getI()][cell.getJ() - 1]))) {
+            if (!(cell.getJ() > 0 && (data[cell.getI()][cell.getJ() - 1].getData() == Field.ZERO
+                    || figure.contains(data[cell.getI()][cell.getJ() - 1])))) {
                 canMove = false;
                 break;
             }
@@ -117,8 +117,8 @@ public class FigureActionManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         for (Cell cell : cells) {
-            if (!(cell.getJ() != 9) && (data[cell.getI()][cell.getJ() + 1].getData() == Field.ZERO
-                    || figure.contains(data[cell.getI()][cell.getJ() + 1]))) {
+            if (!(cell.getJ() < 9 && (data[cell.getI()][cell.getJ() + 1].getData() == Field.ZERO
+                    || figure.contains(data[cell.getI()][cell.getJ() + 1])))) {
                 canMove = false;
                 break;
             }
@@ -208,7 +208,7 @@ public class FigureActionManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         List<Cell> alreadyMovedCells = new ArrayList<>(figure.getCells().size());
-        if (isPossibleToMoveTheFigureLeft(figure, field)) {
+        if (isPossibleToMoveTheFigureRight(figure, field)) {
             for (Iterator<Cell> iterator = cells.iterator(); iterator.hasNext(); ) {
                 Cell cell = iterator.next();
                 if (!alreadyMovedCells.contains(cell)) {

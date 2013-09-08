@@ -22,19 +22,26 @@ public class Executor {
     public static void main(String[] args) {
         logger.debug("Starting the application...");
         Field field = new Field();
-        FigureCreator creator = null;
+        FigureCreator creator;
         FigureActionManager manager = new FigureActionManager();
         Figure figure = null;
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
                 try {
                     // TODO: Fix reading of the input data.
-                    int ch = System.in.read();
-                    while (ch == 49) {
-                        manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+                    int ch;
+                    while (true) {
                         ch = System.in.read();
+                        if (ch == 49) {
+                            manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+                        } else if (ch == 50) {
+                            manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
+                        }
+                        else {
+                            manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
+                            break;
+                        }
                     }
-                    manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
                 } catch (IOException e) {
                     logger.error("Error during reading the input data.");
                     break;
