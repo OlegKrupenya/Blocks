@@ -123,6 +123,16 @@ public class Field {
     }
 
     /**
+     * Checks if there is enough space to create a new figure.
+     */
+    public void verifyFreeSpace() {
+        if (this.cells[0][4].getData() == Field.ONE && this.cells[1][4].getData() == Field.ONE
+                && this.cells[2][4].getData() == Field.ONE && this.cells[3][4].getData() == Field.ONE) {
+            hasSpace = false;
+        }
+    }
+
+    /**
      * Logs the current state of the data
      */
     public void showData() {

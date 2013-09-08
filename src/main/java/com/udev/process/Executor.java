@@ -34,6 +34,7 @@ public class Executor {
                 field.setPossibleMoveFigure(true);
             }
             field.showData();
+            field.verifyFreeSpace();
         }
         System.out.println("You've won :)");
     }
