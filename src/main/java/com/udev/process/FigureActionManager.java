@@ -1,6 +1,6 @@
 package com.udev.process;
 
-import com.udev.domain.figures.Cell;
+import com.udev.domain.Cell;
 import com.udev.factory.CubeCreator;
 import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**

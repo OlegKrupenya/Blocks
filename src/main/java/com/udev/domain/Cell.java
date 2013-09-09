@@ -1,4 +1,4 @@
-package com.udev.domain.figures;
+package com.udev.domain;
 
 /**
  * The Cell consists of its coordinates on the field and the data: 1(not empty) or 0 (empty)

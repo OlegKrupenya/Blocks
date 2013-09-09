@@ -1,11 +1,10 @@
 package com.udev.process;
 
 import com.udev.domain.Field;
-import com.udev.domain.figures.Cell;
+import com.udev.domain.Cell;
 import com.udev.domain.figures.Cube;
 import com.udev.domain.figures.Figure;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

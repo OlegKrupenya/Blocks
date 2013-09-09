@@ -1,5 +1,7 @@
 package com.udev.domain.figures;
 
+import com.udev.domain.Cell;
+
 import java.util.List;
 
 /**

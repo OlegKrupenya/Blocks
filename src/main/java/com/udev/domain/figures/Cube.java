@@ -1,9 +1,9 @@
 package com.udev.domain.figures;
 
+import com.udev.domain.Cell;
 import com.udev.domain.Field;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
