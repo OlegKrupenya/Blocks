@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class Cube implements Figure {
     public static final int CUBE_HEIGHT = 2;
-    private static final byte CONTENT = 1;
     private int leftBorder;
     private int height;
     private int width;
@@ -87,7 +86,7 @@ public class Cube implements Figure {
         for (int i = 0; i < CUBE_HEIGHT; i++) {
             for (int j = 0; j < CUBE_HEIGHT; j++) {
                 Cell cell = new Cell();
-                cell.setData(CONTENT);
+                cell.setData(Field.ONE);
                 cell.setI(i);
                 cell.setJ(j + this.leftBorder);
                 cells.add(cell);

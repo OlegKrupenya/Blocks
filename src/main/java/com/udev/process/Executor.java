@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,6 +23,7 @@ public class Executor {
     public static void main(String[] args) {
         logger.debug("Starting the application...");
         Field field = new Field();
+        Random rand = new Random();
         FigureCreator creator;
         FigureActionManager manager = new FigureActionManager();
         Figure figure = null;
@@ -47,7 +49,7 @@ public class Executor {
                     break;
                 }
             } else {
-                creator = manager.getCreator(0);
+                creator = manager.getCreator(rand.nextInt(4));
                 field.showData();
                 figure = creator.createFigure();
                 manager.addFigureToField(figure, field);
