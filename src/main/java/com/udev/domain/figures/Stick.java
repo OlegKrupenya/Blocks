@@ -1,7 +1,9 @@
 package com.udev.domain.figures;
 
 import com.udev.domain.Cell;
+import com.udev.domain.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +13,18 @@ import java.util.List;
  */
 public class Stick implements Figure {
 
+    private static final int STICK_WIDTH = 1;
+    private static final int STICK_HEIGHT = 4;
+
+    private int height;
+    private int width;
+    private int leftBorder;
+
     private List<Cell> cells;
+
+    public Stick() {
+        init();
+    }
 
     /**
      * @return The internal representation of the figure.
@@ -20,7 +33,7 @@ public class Stick implements Figure {
      */
     @Override
     public List<Cell> getCells() {
-        return null;
+        return this.cells;
     }
 
     /**
@@ -32,41 +45,62 @@ public class Stick implements Figure {
      */
     @Override
     public void setCells(List<Cell> cells) {
-
+         this.cells = cells;
     }
 
     @Override
     public int getLeftBorder() {
-        return 0;
+        return this.leftBorder;
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return this.width;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return this.height;
     }
 
     @Override
     public void setWidth(int width) {
-
+        this.width = width;
     }
 
     @Override
     public void setHeight(int height) {
-
+        this.height = height;
     }
 
     @Override
-    public boolean contains(Cell cell) {
+    public boolean contains(Cell obj) {
+        for (Cell cell : this.getCells()) {
+            if (cell.equals(obj)) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public void clear() {
+        for (int i = 0; i < STICK_HEIGHT; i++) {
+            for (int j = 0; j < STICK_WIDTH; j++) {
+                Cell cell = new Cell();
+                cell.setData(Field.ONE);
+                cell.setI(i);
+                cell.setJ(j + this.leftBorder);
+                cells.add(cell);
+            }
+        }
+    }
 
+    private void init() {
+        this.height = STICK_HEIGHT;
+        this.width = STICK_WIDTH;
+        this.leftBorder = Field.CREATE_FIGURE_LEFT_COORDINATE;
+        this.cells = new ArrayList<>(4);
+        clear();
     }
 }
