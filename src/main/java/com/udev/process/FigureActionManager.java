@@ -1,12 +1,9 @@
 package com.udev.process;
 
 import com.udev.domain.Cell;
-import com.udev.factory.CubeCreator;
-import com.udev.factory.FigureCreator;
+import com.udev.factory.*;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
-import com.udev.factory.LFigureCreator;
-import com.udev.factory.StickCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +28,11 @@ public class FigureActionManager {
      * Creator that creates {@link com.udev.domain.figures.LFigure}
      */
     private FigureCreator lFigureCreator = new LFigureCreator();
+
+    /**
+     * Creator that creates {@link com.udev.domain.figures.ReverseLFigure}
+     */
+    private FigureCreator reverseLFigureCreator = new ReverseLFigureCreator();
 
     /**
      * Creator that creates sticks.
@@ -77,6 +79,10 @@ public class FigureActionManager {
             }
             case 1: {
                 creator = lFigureCreator;
+                break;
+            }
+            case 2: {
+                creator = reverseLFigureCreator;
                 break;
             }
             default: {
