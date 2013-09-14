@@ -28,6 +28,19 @@ public class Cell {
 
     }
 
+    /**
+     * Constructor.
+     *
+     * @param i  Left index in the field.
+     * @param j  Upper index in the field.
+     * @param data  1 - not empty, 0 - empty.
+     */
+    public Cell(int i, int j, byte data) {
+        this.i = i;
+        this.j = j;
+        this.data = data;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

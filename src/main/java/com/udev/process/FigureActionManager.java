@@ -5,6 +5,7 @@ import com.udev.factory.CubeCreator;
 import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
+import com.udev.factory.LFigureCreator;
 import com.udev.factory.StickCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +28,14 @@ public class FigureActionManager {
     private FigureCreator cubeCreator = new CubeCreator();
 
     /**
+     * Creator that creates {@link com.udev.domain.figures.LFigure}
+     */
+    private FigureCreator lFigureCreator = new LFigureCreator();
+
+    /**
      * Creator that creates sticks.
      */
-    private StickCreator stickCreator = new StickCreator();
+    private FigureCreator stickCreator = new StickCreator();
 
     /**
      * Determines direction to move a figure
@@ -56,7 +62,7 @@ public class FigureActionManager {
     /**
      * Returns creator by index.
      * 0 - {@link CubeCreator},
-     * 1 - {@link StickCreator}
+     * 1 - {@link LFigureCreator}
      * TODO: Add others creators to this JavaDoc
      *
      * @param index Index to get creator.
@@ -64,11 +70,18 @@ public class FigureActionManager {
      */
     public FigureCreator getCreator(int index) {
         FigureCreator creator;
-        if (index == 0) {
-            creator = cubeCreator;
-        }
-        else {
-            creator = stickCreator;
+        switch (index) {
+            case 0: {
+                creator = cubeCreator;
+                break;
+            }
+            case 1: {
+                creator = lFigureCreator;
+                break;
+            }
+            default: {
+                creator = stickCreator;
+            }
         }
         return creator;
     }
