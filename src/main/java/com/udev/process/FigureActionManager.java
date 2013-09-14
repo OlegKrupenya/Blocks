@@ -45,6 +45,11 @@ public class FigureActionManager {
     private FigureCreator stickCreator = new StickCreator();
 
     /**
+     * Creator that creates {@link com.udev.domain.figures.ZFigure}
+     */
+    private FigureCreator zFigureCreator = new ZFigureCreator();
+
+    /**
      * Determines direction to move a figure
      */
     public enum Move {
@@ -92,6 +97,10 @@ public class FigureActionManager {
             }
             case 3: {
                 creator = tFigureCreator;
+                break;
+            }
+            case 4: {
+                creator = zFigureCreator;
                 break;
             }
             default: {
