@@ -31,6 +31,7 @@ public class Executor {
             if (field.isPossibleMoveFigure()) {
                 try {
                     // TODO: Correct checking of the free space to create the figure.
+                    // TODO: Rotation.
                     // TODO: Fix reading of the input data.
                     // TODO: UI
                     // TODO: Counting of scores
@@ -54,7 +55,7 @@ public class Executor {
                     break;
                 }
             } else {
-                creator = manager.getCreator(rand.nextInt(5));
+                creator = manager.getCreator(rand.nextInt(7));
                 field.showData();
                 figure = creator.createFigure();
                 manager.addFigureToField(figure, field);

@@ -35,6 +35,11 @@ public class FigureActionManager {
     private FigureCreator reverseLFigureCreator = new ReverseLFigureCreator();
 
     /**
+     * Creator that creates {@link com.udev.domain.figures.ReverseZFigure}
+     */
+    private FigureCreator reverseZFigureCreator = new ReverseZFigureCreator();
+
+    /**
      * Creator that creates {@link com.udev.domain.figures.TFigure}
      */
     private FigureCreator tFigureCreator = new TFigureCreator();
@@ -101,6 +106,10 @@ public class FigureActionManager {
             }
             case 4: {
                 creator = zFigureCreator;
+                break;
+            }
+            case 5: {
+                creator = reverseZFigureCreator;
                 break;
             }
             default: {
