@@ -75,6 +75,7 @@ public class Field {
 
     /**
      * Sets data of the field.
+     *
      * @param cells Data of the field.
      */
     public void setCells(Cell[][] cells) {
@@ -124,11 +125,17 @@ public class Field {
 
     /**
      * Checks if there is enough space to create a new figure.
+     * TODO:
+     * The next figure should be generated in advance and this method will calculate if there is enough space
+     * to create this figure
      */
     public void verifyFreeSpace() {
-        if (this.cells[0][4].getData() == Field.ONE && this.cells[1][4].getData() == Field.ONE
+        if ((this.cells[0][4].getData() == Field.ONE && this.cells[1][4].getData() == Field.ONE
                 && this.cells[2][4].getData() == Field.ONE && this.cells[3][4].getData() == Field.ONE
-                && this.cells[4][4].getData() == Field.ONE) {
+                && this.cells[4][4].getData() == Field.ONE) ||
+            (this.cells[0][5].getData() == Field.ONE && this.cells[1][5].getData() == Field.ONE
+                    && this.cells[2][5].getData() == Field.ONE && this.cells[3][5].getData() == Field.ONE
+                    && this.cells[4][5].getData() == Field.ONE)) {
             hasSpace = false;
         }
     }

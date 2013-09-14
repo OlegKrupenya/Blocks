@@ -24,6 +24,13 @@ public class LFigure implements Figure {
     private List<Cell> cells;
 
     /**
+     * Constructor.
+     */
+    public LFigure() {
+        init();
+    }
+
+    /**
      * @return The internal representation of the figure.
      *         It consist of the list of cells that have data and position
      *         of the cell on the field.
