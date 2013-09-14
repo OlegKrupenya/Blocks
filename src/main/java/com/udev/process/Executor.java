@@ -30,7 +30,11 @@ public class Executor {
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
                 try {
+                    // TODO: Correct checking of the free space to create the figure.
                     // TODO: Fix reading of the input data.
+                    // TODO: UI
+                    // TODO: Counting of scores
+                    // TODO: Removing of the line if it populated.
                     int ch;
                     while (true) {
                         ch = System.in.read();
