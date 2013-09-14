@@ -35,6 +35,7 @@ public class Executor {
                     // TODO: UI
                     // TODO: Counting of scores
                     // TODO: Removing of the line if it populated.
+                    // TODO: JavaDocs
                     int ch;
                     while (true) {
                         ch = System.in.read();
@@ -53,7 +54,7 @@ public class Executor {
                     break;
                 }
             } else {
-                creator = manager.getCreator(rand.nextInt(4));
+                creator = manager.getCreator(rand.nextInt(5));
                 field.showData();
                 figure = creator.createFigure();
                 manager.addFigureToField(figure, field);

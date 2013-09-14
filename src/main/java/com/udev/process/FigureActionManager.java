@@ -35,6 +35,11 @@ public class FigureActionManager {
     private FigureCreator reverseLFigureCreator = new ReverseLFigureCreator();
 
     /**
+     * Creator that creates {@link com.udev.domain.figures.TFigure}
+     */
+    private FigureCreator tFigureCreator = new TFigureCreator();
+
+    /**
      * Creator that creates sticks.
      */
     private FigureCreator stickCreator = new StickCreator();
@@ -83,6 +88,10 @@ public class FigureActionManager {
             }
             case 2: {
                 creator = reverseLFigureCreator;
+                break;
+            }
+            case 3: {
+                creator = tFigureCreator;
                 break;
             }
             default: {
