@@ -162,8 +162,9 @@ public class Field {
                 linesToRemove.add(i);
             }
         }
-        rearrangeData(linesToRemove);
         scores = scores + linesToRemove.size() * 10;
+
+        rearrangeData(linesToRemove);
     }
 
     /**
@@ -206,8 +207,7 @@ public class Field {
                 }
             }
             for (int j = 0; j < 10; j++) {
-                cells[0][j].setData(ZERO);
-                cells[0][j].setI(0);
+                cells[0][j] = new Cell(0, j, ZERO);
             }
             showData();
         }
