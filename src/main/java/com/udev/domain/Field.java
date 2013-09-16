@@ -3,6 +3,8 @@ package com.udev.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.*;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -52,6 +54,11 @@ public class Field {
      * When it is {@code false}, the new figure will be created.
      */
     private boolean possibleMoveFigure = false;
+
+    /**
+     * Scores.
+     */
+    private int scores = 0;
 
     /**
      * Data of the field.
@@ -118,6 +125,13 @@ public class Field {
         this.notFull = notFull;
     }
 
+    /**
+     *
+     * @return Scores.
+     */
+    public int getScores() {
+        return scores;
+    }
 
     /**
      * Clears the com.udev.field
@@ -131,6 +145,25 @@ public class Field {
                 cell.setData(ZERO);
             }
         }
+    }
+
+    public void checkScores() {
+        Queue<Integer> linesToRemove = new ArrayDeque<>();
+        for (int i = 0; i < 20; i++) {
+            boolean lineIsPopulated = true;
+            for (int j = 0; j < 10; j++) {
+                Cell cell = cells[i][j];
+                if (cell.getData() == Field.ZERO) {
+                    lineIsPopulated = false;
+                    break;
+                }
+            }
+            if (lineIsPopulated) {
+                linesToRemove.add(i);
+            }
+        }
+        rearrangeData(linesToRemove);
+        scores = scores + linesToRemove.size() * 10;
     }
 
     /**
@@ -160,6 +193,23 @@ public class Field {
                 cell.setData(ZERO);
                 cells[i][j] = cell;
             }
+        }
+    }
+
+    private void rearrangeData(Queue<Integer> linesToRemove) {
+        while (!linesToRemove.isEmpty()) {
+            int line = linesToRemove.poll();
+            for (int i = line; i > 0; i--) {
+                for (int j = 0; j < 10; j++) {
+                    cells[i][j] = cells[i - 1][j];
+                    cells[i][j].setI(i);
+                }
+            }
+            for (int j = 0; j < 10; j++) {
+                cells[0][j].setData(ZERO);
+                cells[0][j].setI(0);
+            }
+            showData();
         }
     }
 }

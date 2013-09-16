@@ -36,9 +36,11 @@ public class Executor {
                     // TODO: Rotation.
                     // TODO: Fix reading of the input data.
                     // TODO: UI
-                    // TODO: Counting of scores
                     // TODO: Removing of the line if it populated.
                     // TODO: JavaDocs
+                    // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
+                    // TODO: Figure is moving through 2 cells
+                    // TODO: After checking scores the new figure is not moving.
                     int ch;
                     while (true) {
                         ch = System.in.read();
@@ -52,6 +54,7 @@ public class Executor {
                             break;
                         }
                     }
+                    field.checkScores();
                 } catch (IOException e) {
                     logger.error("Error during reading the input data.");
                     break;
@@ -70,6 +73,6 @@ public class Executor {
             }
             field.showData();
         }
-        System.out.println("You've won :)");
+        System.out.println("Your score is: " + field.getScores());
     }
 }
