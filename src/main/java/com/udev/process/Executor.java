@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -27,6 +29,17 @@ public class Executor {
         FigureCreator creator;
         FigureActionManager manager = new FigureActionManager();
         Figure figure = null;
+
+        Queue<Figure> figureQueue = new LinkedList<>();
+        creator = manager.getCreator(rand.nextInt(7));
+        figureQueue.add(creator.createFigure());
+        /*
+        creator = manager.getCreator(rand.nextInt(7));
+                field.showData();
+                figure = creator.createFigure();
+                manager.addFigureToField(figure, field);
+                field.setPossibleMoveFigure(true);
+         */
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
                 try {
@@ -57,7 +70,8 @@ public class Executor {
             } else {
                 creator = manager.getCreator(rand.nextInt(7));
                 field.showData();
-                figure = creator.createFigure();
+                figure = figureQueue.remove();
+                figureQueue.add(creator.createFigure());
                 manager.addFigureToField(figure, field);
                 field.setPossibleMoveFigure(true);
             }
