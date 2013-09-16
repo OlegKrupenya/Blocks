@@ -119,14 +119,18 @@ public class FigureActionManager {
         return creator;
     }
 
-    public void addFigureToField(Figure figure, Field field) {
+    public boolean addFigureToField(Figure figure, Field field) {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         for (Cell cell : cells) {
             int i = cell.getI();
             int j = cell.getJ();
+            if (data[i][j].getData() == Field.ONE) {
+                return false;
+            }
             data[i][j] = cell;
         }
+        return true;
     }
 
     /**

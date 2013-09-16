@@ -30,16 +30,6 @@ public class Executor {
         FigureActionManager manager = new FigureActionManager();
         Figure figure = null;
 
-        Queue<Figure> figureQueue = new LinkedList<>();
-        creator = manager.getCreator(rand.nextInt(7));
-        figureQueue.add(creator.createFigure());
-        /*
-        creator = manager.getCreator(rand.nextInt(7));
-                field.showData();
-                figure = creator.createFigure();
-                manager.addFigureToField(figure, field);
-                field.setPossibleMoveFigure(true);
-         */
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
                 try {
@@ -70,13 +60,17 @@ public class Executor {
             } else {
                 creator = manager.getCreator(rand.nextInt(7));
                 field.showData();
-                figure = figureQueue.remove();
-                figureQueue.add(creator.createFigure());
-                manager.addFigureToField(figure, field);
-                field.setPossibleMoveFigure(true);
+                figure = creator.createFigure();
+                boolean hasFreeSpace = manager.addFigureToField(figure, field);
+                if (hasFreeSpace) {
+                    field.setPossibleMoveFigure(true);
+                }
+                else {
+                    field.setNotFull(hasFreeSpace);
+                }
             }
             field.showData();
-            field.verifyFreeSpace();
+            //field.verifyFreeSpace();
         }
         System.out.println("You've won :)");
     }

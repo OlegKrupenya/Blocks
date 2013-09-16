@@ -108,6 +108,16 @@ public class Field {
         return hasSpace;
     }
 
+    /**
+     * Sets notFull field.
+     *
+     * @param notFull Indicates if it is possible to create a new figure.
+     * When the field is full, the game is over.
+     */
+    public void setNotFull(boolean notFull) {
+        this.hasSpace = notFull;
+    }
+
 
     /**
      * Clears the com.udev.field
