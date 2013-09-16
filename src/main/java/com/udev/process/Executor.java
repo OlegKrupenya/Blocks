@@ -33,7 +33,6 @@ public class Executor {
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
                 try {
-                    // TODO: Correct checking of the free space to create the figure.
                     // TODO: Rotation.
                     // TODO: Fix reading of the input data.
                     // TODO: UI
@@ -70,7 +69,6 @@ public class Executor {
                 }
             }
             field.showData();
-            //field.verifyFreeSpace();
         }
         System.out.println("You've won :)");
     }

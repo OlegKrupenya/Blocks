@@ -45,7 +45,7 @@ public class Field {
     /**
      * Is set to {@code true} when there is enough space to create a new figure.
      */
-    private boolean hasSpace = true;
+    private boolean notFull = true;
 
     /**
      * Is set to {@code true} when it is possible to move the figure.
@@ -105,7 +105,7 @@ public class Field {
      * @return <code>true</code> if there is enough space to create a new figure.
      */
     public boolean isNotFull() {
-        return hasSpace;
+        return notFull;
     }
 
     /**
@@ -115,7 +115,7 @@ public class Field {
      * When the field is full, the game is over.
      */
     public void setNotFull(boolean notFull) {
-        this.hasSpace = notFull;
+        this.notFull = notFull;
     }
 
 
@@ -130,23 +130,6 @@ public class Field {
                 cell.setJ(j);
                 cell.setData(ZERO);
             }
-        }
-    }
-
-    /**
-     * Checks if there is enough space to create a new figure.
-     * TODO:
-     * The next figure should be generated in advance and this method will calculate if there is enough space
-     * to create this figure
-     */
-    public void verifyFreeSpace() {
-        if ((this.cells[0][4].getData() == Field.ONE && this.cells[1][4].getData() == Field.ONE
-                && this.cells[2][4].getData() == Field.ONE && this.cells[3][4].getData() == Field.ONE
-                && this.cells[4][4].getData() == Field.ONE) ||
-            (this.cells[0][5].getData() == Field.ONE && this.cells[1][5].getData() == Field.ONE
-                    && this.cells[2][5].getData() == Field.ONE && this.cells[3][5].getData() == Field.ONE
-                    && this.cells[4][5].getData() == Field.ONE)) {
-            hasSpace = false;
         }
     }
 
