@@ -47,6 +47,9 @@ public class Executor {
                         } else if (ch == 50) {
                             manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
                         }
+                        else if (ch == 52) {
+                            manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
+                        }
                         else {
                             manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
                             break;

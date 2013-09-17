@@ -154,6 +154,10 @@ public class FigureActionManager {
                 moveFigureRight(figure, field);
                 break;
             }
+            case FAST_DOWN:{
+                moveFigureFastDownwards(figure, field);
+                break;
+            }
         }
     }
 
@@ -242,6 +246,17 @@ public class FigureActionManager {
             }
             figure.setCells(alreadyMovedCells);
             logger.debug("The figure has been moved downwards:\n" + figure + "\n");
+        }
+    }
+
+    /**
+     * Drops the figure.
+     * @param figure The figure to move.
+     * @param field The field.
+     */
+    private void moveFigureFastDownwards(Figure figure, Field field) {
+        while (isPossibleToMoveTheFigureDownwards(figure, field)) {
+            moveFigureDownwards(figure, field);
         }
     }
 
