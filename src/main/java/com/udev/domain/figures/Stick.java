@@ -110,6 +110,7 @@ public class Stick implements Figure {
     private void init() {
         this.height = STICK_HEIGHT;
         this.width = STICK_WIDTH;
+        this.rotationState = RotationState.VERTICAL;
         this.leftBorder = Field.CREATE_FIGURE_LEFT_COORDINATE;
         this.cells = new ArrayList<>(4);
         clear();

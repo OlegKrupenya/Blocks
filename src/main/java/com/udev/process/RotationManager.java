@@ -57,14 +57,17 @@ public class RotationManager {
             centerOfRotation = cells.get(1);
 
             Cell first = cells.get(0);
+            data[first.getI()][first.getJ()] = new Cell(first.getI(), first.getJ(), Field.ZERO);
             first.setI(centerOfRotation.getI() - 1);
             first.setJ(centerOfRotation.getJ());
 
             Cell third = cells.get(2);
+            data[third.getI()][third.getJ()] = new Cell(third.getI(), third.getJ(), Field.ZERO);
             third.setI(centerOfRotation.getI() + 1);
             third.setJ(centerOfRotation.getJ());
 
             Cell fourth = cells.get(3);
+            data[fourth.getI()][fourth.getJ()] = new Cell(fourth.getI(), fourth.getJ(), Field.ZERO);
             fourth.setI(centerOfRotation.getI() + 2);
             fourth.setJ(centerOfRotation.getJ());
 
@@ -74,14 +77,17 @@ public class RotationManager {
             Collections.sort(cells, new VerticalComparator());
             centerOfRotation = cells.get(1);
             Cell first = cells.get(0);
+            data[first.getI()][first.getJ()] = new Cell(first.getI(), first.getJ(), Field.ZERO);
             first.setI(centerOfRotation.getI());
             first.setJ(centerOfRotation.getJ() - 1);
 
             Cell third = cells.get(2);
+            data[third.getI()][third.getJ()] = new Cell(third.getI(), third.getJ(), Field.ZERO);
             third.setI(centerOfRotation.getI());
             third.setJ(centerOfRotation.getJ() + 1);
 
             Cell fourth = cells.get(3);
+            data[fourth.getI()][fourth.getJ()] = new Cell(fourth.getI(), fourth.getJ(), Field.ZERO);
             fourth.setI(centerOfRotation.getI());
             fourth.setJ(centerOfRotation.getJ() + 2);
 
@@ -90,11 +96,13 @@ public class RotationManager {
     }
 
     private boolean isPossibleToRotateStickHorizontally(Figure figure, Field field) {
+        // TODO: Implement
         boolean canRotate = true;
         return canRotate;
     }
 
     private boolean isPossibleToRotateStickVertically(Figure figure, Field field) {
+        // TODO: Implement
         boolean canRotate = true;
         return canRotate;
     }
