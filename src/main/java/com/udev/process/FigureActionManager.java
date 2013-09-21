@@ -40,6 +40,11 @@ public class FigureActionManager {
     private FigureCreator reverseZFigureCreator = new ReverseZFigureCreator();
 
     /**
+     * Rotation manager.
+     */
+    private RotationManager rotationManager = new RotationManager();
+
+    /**
      * Creator that creates {@link com.udev.domain.figures.TFigure}
      */
     private FigureCreator tFigureCreator = new TFigureCreator();
@@ -159,6 +164,15 @@ public class FigureActionManager {
                 break;
             }
         }
+    }
+
+    /**
+     * Rotates the figure
+     * @param figure The figure to rotate.
+     * @param field  The field.
+     */
+    public void rotateFigure(Figure figure, Field field) {
+        this.rotationManager.rotate(figure, field);
     }
 
     /**

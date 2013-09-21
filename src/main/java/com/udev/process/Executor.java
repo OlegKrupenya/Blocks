@@ -50,6 +50,9 @@ public class Executor {
                         else if (ch == 52) {
                             manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
                         }
+                        else if (ch == 53) {
+                            manager.rotateFigure(figure, field);
+                        }
                         else {
                             manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
                             break;
