@@ -20,8 +20,8 @@ public class LFigure implements Figure {
     private int height;
     private int width;
     private int leftBorder;
-
     private List<Cell> cells;
+    private RotationState rotationState;
 
     /**
      * Constructor.
@@ -75,6 +75,16 @@ public class LFigure implements Figure {
     @Override
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    @Override
+    public RotationState getRotationState() {
+        return rotationState;
+    }
+
+    @Override
+    public void setRotationState(RotationState rotationState) {
+        this.rotationState = rotationState;
     }
 
     @Override

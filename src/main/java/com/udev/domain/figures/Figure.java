@@ -43,4 +43,8 @@ public interface Figure {
     public boolean contains(Cell cell);
 
     public void clear();
+
+    public void setRotationState(RotationState rotationState);
+
+    public RotationState getRotationState();
 }

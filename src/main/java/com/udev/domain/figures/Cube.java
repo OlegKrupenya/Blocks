@@ -19,6 +19,7 @@ public class Cube implements Figure {
     private int height;
     private int width;
     private List<Cell> cells;
+    private RotationState rotationState;
 
     public Cube() {
         init();
@@ -45,6 +46,11 @@ public class Cube implements Figure {
     }
 
     @Override
+    public RotationState getRotationState() {
+        return rotationState;
+    }
+
+    @Override
     public int getWidth() {
         return this.width;
     }
@@ -57,6 +63,11 @@ public class Cube implements Figure {
     @Override
     public void setWidth(int width) {
         this.width = width;
+    }
+
+    @Override
+    public void setRotationState(RotationState rotationState) {
+        this.rotationState = rotationState;
     }
 
     @Override

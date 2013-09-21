@@ -1,7 +1,10 @@
 package com.udev.process;
 
+import com.udev.domain.Cell;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,4 +27,13 @@ public class RotationManager {
     private void rotateStick(Figure figure, Field field) {
 
     }
+
+    private boolean isPossibleToRotateStick(Figure figure, Field field) {
+        boolean canRotate = true;
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
+
+        return canRotate;
+    }
+
 }
