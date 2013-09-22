@@ -64,7 +64,7 @@ public class Executor {
                     break;
                 }
             } else {
-                creator = manager.getCreator(rand.nextInt(7));
+                creator = manager.getCreator(7);
                 field.showData();
                 figure = creator.createFigure();
                 boolean hasFreeSpace = manager.addFigureToField(figure, field);

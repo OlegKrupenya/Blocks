@@ -53,7 +53,6 @@ public class RotationManager {
         RotationState state = figure.getRotationState();
         Cell centerOfRotation;
         if (state == RotationState.HORIZONTAL && isPossibleToRotateStickVertically(figure, field)) {
-            Collections.sort(cells, new HorizontalComparator());
             centerOfRotation = cells.get(1);
 
             Cell first = cells.get(0);
@@ -74,7 +73,6 @@ public class RotationManager {
             figure.setRotationState(RotationState.VERTICAL);
         }
         else if (state == RotationState.VERTICAL && isPossibleToRotateStickHorizontally(figure, field)) {
-            Collections.sort(cells, new VerticalComparator());
             centerOfRotation = cells.get(1);
             Cell first = cells.get(0);
             data[first.getI()][first.getJ()] = new Cell(first.getI(), first.getJ(), Field.ZERO);
@@ -96,14 +94,44 @@ public class RotationManager {
     }
 
     private boolean isPossibleToRotateStickHorizontally(Figure figure, Field field) {
-        // TODO: Implement
         boolean canRotate = true;
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
+        Collections.sort(cells, new VerticalComparator());
+
+        Cell first = cells.get(0);
+        if (first.getJ() == 0 || data[first.getI()][first.getJ() - 1].getData() == Field.ONE) {
+            canRotate = false;
+        }
+
+        Cell third = cells.get(2);
+        if (third.getJ() >= 8 || data[first.getI()][first.getJ() + 1].getData() == Field.ONE) {
+            canRotate = false;
+        }
+
+        Cell fourth = cells.get(3);
+        if (fourth.getJ() >= 8 || data[first.getI()][first.getJ() + 2].getData() == Field.ONE) {
+            canRotate = false;
+        }
         return canRotate;
     }
 
     private boolean isPossibleToRotateStickVertically(Figure figure, Field field) {
-        // TODO: Implement
         boolean canRotate = true;
+        Cell[][] data = field.getCells();
+        List<Cell> cells = figure.getCells();
+        Collections.sort(cells, new HorizontalComparator());
+
+        Cell third = cells.get(2);
+        if (third.getI() >= 18 || data[third.getI() + 1][third.getJ()].getData() == Field.ONE) {
+            canRotate = false;
+        }
+
+        Cell fourth = cells.get(3);
+        if (fourth.getI() >= 18 || data[fourth.getI() + 2][fourth.getJ()].getData() == Field.ONE) {
+            canRotate = false;
+        }
+
         return canRotate;
     }
 }
