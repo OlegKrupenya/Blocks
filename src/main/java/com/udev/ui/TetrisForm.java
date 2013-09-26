@@ -1,6 +1,8 @@
 package com.udev.ui;
 
-import com.udev.process.Executor;
+import com.udev.domain.Field;
+import com.udev.events.EventDispatcher;
+import com.udev.events.PaintEventListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +12,17 @@ import java.awt.*;
  * Date: 9/25/13
  * Time: 10:14 PM
  */
-public class TetrisForm extends JFrame {
+public class TetrisForm extends JFrame implements PaintEventListener {
 
-    private Executor executor;
+    private EventDispatcher dispatcher;
+
+    public EventDispatcher getDispatcher() {
+        return dispatcher;
+    }
+
+    public void setDispatcher(EventDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
+    }
 
     public void paint(Graphics g) {
         Graphics2D ga = (Graphics2D) g;
@@ -20,6 +30,11 @@ public class TetrisForm extends JFrame {
         ga.drawRect(50, 50, 30 * 10, 30 * 20);
         drawHorizontalLines(ga);
         drawVerticalLines(ga);
+    }
+
+    @Override
+    public void paintField(Field field) {
+        field.showData();
     }
 
     private void drawHorizontalLines(Graphics2D ga) {
@@ -47,12 +62,5 @@ public class TetrisForm extends JFrame {
             x1 = x1 + 30;
             x2 = x2 + 30;
         }
-    }
-
-    public static void main(String args[]) {
-        TetrisForm frame = new TetrisForm();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(30 * 10 + 100, 30 * 20 + 100);
-        frame.setVisible(true);
     }
 }

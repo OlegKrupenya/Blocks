@@ -1,15 +1,17 @@
 package com.udev.process;
 
+import com.udev.events.EventDispatcher;
+import com.udev.events.PaintEventListener;
 import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
+import com.udev.ui.TetrisForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,11 +26,21 @@ public class Executor {
 
     public static void main(String[] args) {
         logger.debug("Starting the application...");
+
+        TetrisForm frame = new TetrisForm();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(30 * 10 + 100, 30 * 20 + 100);
+        frame.setVisible(true);
+
         Field field = new Field();
         Random rand = new Random();
         FigureCreator creator;
         FigureActionManager manager = new FigureActionManager();
         Figure figure = null;
+
+        EventDispatcher dispatcher = new EventDispatcher();
+        dispatcher.addEventListener(frame);
+        frame.setDispatcher(dispatcher);
 
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
@@ -46,14 +58,11 @@ public class Executor {
                             manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
                         } else if (ch == 50) {
                             manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
-                        }
-                        else if (ch == 52) {
+                        } else if (ch == 52) {
                             manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
-                        }
-                        else if (ch == 53) {
+                        } else if (ch == 53) {
                             manager.rotateFigure(figure, field);
-                        }
-                        else {
+                        } else {
                             manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
                             break;
                         }
@@ -65,17 +74,17 @@ public class Executor {
                 }
             } else {
                 creator = manager.getCreator(7);
-                field.showData();
+                dispatcher.paintField(field);
+
                 figure = creator.createFigure();
                 boolean hasFreeSpace = manager.addFigureToField(figure, field);
                 if (hasFreeSpace) {
                     field.setPossibleMoveFigure(true);
-                }
-                else {
+                } else {
                     field.setNotFull(hasFreeSpace);
                 }
             }
-            field.showData();
+            dispatcher.paintField(field);
         }
         System.out.println("Your score is: " + field.getScores());
     }
