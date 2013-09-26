@@ -73,7 +73,7 @@ public class Executor {
                     break;
                 }
             } else {
-                creator = manager.getCreator(7);
+                creator = manager.getCreator(rand.nextInt(7));
                 dispatcher.paintField(field);
 
                 figure = creator.createFigure();
