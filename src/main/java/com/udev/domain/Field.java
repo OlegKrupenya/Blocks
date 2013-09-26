@@ -209,7 +209,7 @@ public class Field {
             for (int j = 0; j < 10; j++) {
                 cells[0][j] = new Cell(0, j, ZERO);
             }
-            showData();
+            //showData();
         }
     }
 }
