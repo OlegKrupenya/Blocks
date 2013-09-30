@@ -1,8 +1,7 @@
 package com.udev.ui;
 
-import com.udev.domain.Cell;
 import com.udev.domain.Field;
-import com.udev.events.EventDispatcher;
+import com.udev.events.PaintEventDispatcher;
 import com.udev.events.PaintEventListener;
 
 import javax.swing.*;
@@ -17,15 +16,15 @@ import java.awt.event.KeyListener;
  */
 public class TetrisForm extends JFrame implements PaintEventListener {
 
-    private EventDispatcher dispatcher;
+    private PaintEventDispatcher dispatcher;
 
     private TetrisPanel panel;
 
-    public EventDispatcher getDispatcher() {
+    public PaintEventDispatcher getDispatcher() {
         return dispatcher;
     }
 
-    public void setDispatcher(EventDispatcher dispatcher) {
+    public void setDispatcher(PaintEventDispatcher dispatcher) {
         this.dispatcher = dispatcher;
     }
 
@@ -51,7 +50,7 @@ public class TetrisForm extends JFrame implements PaintEventListener {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                JOptionPane.showMessageDialog(null, e.getKeyCode());
+
             }
 
             @Override

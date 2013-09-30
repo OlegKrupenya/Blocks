@@ -10,8 +10,8 @@ import java.util.List;
  * Date: 9/26/13
  * Time: 1:00 PM
  */
-public class EventDispatcher {
-    private List<PaintEventListener> listeners = new ArrayList<PaintEventListener>();
+public class PaintEventDispatcher {
+    private List<PaintEventListener> listeners = new ArrayList<>();
 
     public void addEventListener(PaintEventListener paintEventListener) {
         this.listeners.add(paintEventListener);

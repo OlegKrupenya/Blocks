@@ -1,7 +1,6 @@
 package com.udev.process;
 
-import com.udev.events.EventDispatcher;
-import com.udev.events.PaintEventListener;
+import com.udev.events.PaintEventDispatcher;
 import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
@@ -38,7 +37,7 @@ public class Executor {
         FigureActionManager manager = new FigureActionManager();
         Figure figure = null;
 
-        EventDispatcher dispatcher = new EventDispatcher();
+        PaintEventDispatcher dispatcher = new PaintEventDispatcher();
         dispatcher.addEventListener(frame);
         frame.setDispatcher(dispatcher);
 
