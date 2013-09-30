@@ -7,6 +7,8 @@ import com.udev.events.PaintEventListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * User: oleg.krupenya
@@ -42,6 +44,20 @@ public class TetrisForm extends JFrame implements PaintEventListener {
      */
     public TetrisForm() throws HeadlessException {
         this.panel = new TetrisPanel();
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                JOptionPane.showMessageDialog(null, e.getKeyCode());
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
         this.add(this.panel);
     }
 
