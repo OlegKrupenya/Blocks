@@ -25,10 +25,26 @@ public class Executor implements KeyboardEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(Executor.class);
 
-    FigureActionManager manager = new FigureActionManager();
-    Figure figure = null;
-    Field field = new Field();
-    PaintEventDispatcher dispatcher = new PaintEventDispatcher();
+    private FigureActionManager manager = new FigureActionManager();
+    private Figure figure = null;
+    private Field field = new Field();
+    private PaintEventDispatcher dispatcher = new PaintEventDispatcher();
+    private Random rand = new Random();
+    private FigureCreator creator;
+
+    // TODO: Rotation.
+    // TODO: Fix reading of the input data.
+    // TODO: UI
+    // TODO: JavaDocs
+    // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
+    // TODO: Figure is moving through 2 cells
+
+    // TODO: Add multithreading:
+    /*
+        Queue will hold tasks (movement or rotation) and execute them.
+        One thread will listen key handling and add tasks to the queue.
+        The second one will add a task to move the figure down by the timer.
+     */
 
     public void execute() {
         TetrisForm frame = new TetrisForm();
@@ -36,49 +52,45 @@ public class Executor implements KeyboardEventListener {
         frame.setSize(30 * 10 + 100, 30 * 20 + 100);
         frame.setVisible(true);
 
-        Random rand = new Random();
-        FigureCreator creator;
-
         dispatcher.addEventListener(frame);
         frame.getKeyboardEventDispatcher().addEventListener(this);
 
-        while (field.isNotFull()) {
-            if (field.isPossibleMoveFigure()) {
-                try {
-                    // TODO: Rotation.
-                    // TODO: Fix reading of the input data.
-                    // TODO: UI
-                    // TODO: JavaDocs
-                    // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
-                    // TODO: Figure is moving through 2 cells
+        creator = manager.getCreator(rand.nextInt(7));
+        dispatcher.paintField(field);
 
-                    // TODO: Add multithreading:
-                    /*
-                        Queue will hold tasks (movement or rotation) and execute them.
-                        One thread will listen key handling and add tasks to the queue.
-                        The second one will add a task to move the figure down by the timer.
-                     */
-                    int ch;
-                    while (true) {
-                        ch = System.in.read();
-                        if (ch == 49) {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
-                        } else if (ch == 50) {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
-                        } else if (ch == 52) {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
-                        } else if (ch == 53) {
-                            manager.rotateFigure(figure, field);
-                        } else {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
-                            break;
-                        }
-                    }
-                    field.checkScores();
-                } catch (IOException e) {
-                    logger.error("Error during reading the input data.");
-                    break;
+        figure = creator.createFigure();
+        boolean hasFreeSpace = manager.addFigureToField(figure, field);
+        if (hasFreeSpace) {
+            field.setPossibleMoveFigure(true);
+        } else {
+            field.setNotFull(hasFreeSpace);
+        }
+        dispatcher.paintField(field);
+    }
+
+    public static void main(String[] args) {
+        logger.debug("Starting the application...");
+        Executor exec = new Executor();
+        exec.execute();
+    }
+
+    @Override
+    public void keyPressed(int keyCode) {
+        if (field.isNotFull()) {
+            if (field.isPossibleMoveFigure()) {
+                if (keyCode == 37) {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+                } else if (keyCode == 39) {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
+                } else if (keyCode == 32) {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
+                } else if (keyCode == 38) {
+                    manager.rotateFigure(figure, field);
+                } else {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
                 }
+                field.checkScores();
+                dispatcher.paintField(field);
             } else {
                 creator = manager.getCreator(rand.nextInt(7));
                 dispatcher.paintField(field);
@@ -91,31 +103,8 @@ public class Executor implements KeyboardEventListener {
                     field.setNotFull(hasFreeSpace);
                 }
             }
-            dispatcher.paintField(field);
-        }
-        System.out.println("Your score is: " + field.getScores());
-    }
-
-    public static void main(String[] args) {
-        logger.debug("Starting the application...");
-        Executor exec = new Executor();
-        exec.execute();
-    }
-
-    @Override
-    public void keyPressed(int keyCode) {
-        if (keyCode == 37) {
-            manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
-        } else if (keyCode == 39) {
-            manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
-        } else if (keyCode == 32) {
-            manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
-        } else if (keyCode == 38) {
-            manager.rotateFigure(figure, field);
         } else {
-            manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
+            JOptionPane.showMessageDialog(null, "Your score is: " + field.getScores());
         }
-        field.checkScores();
-        dispatcher.paintField(field);
     }
 }
