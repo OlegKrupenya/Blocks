@@ -25,19 +25,20 @@ public class Executor implements KeyboardEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(Executor.class);
 
+    FigureActionManager manager = new FigureActionManager();
+    Figure figure = null;
+    Field field = new Field();
+    PaintEventDispatcher dispatcher = new PaintEventDispatcher();
+
     public void execute() {
         TetrisForm frame = new TetrisForm();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(30 * 10 + 100, 30 * 20 + 100);
         frame.setVisible(true);
 
-        Field field = new Field();
         Random rand = new Random();
         FigureCreator creator;
-        FigureActionManager manager = new FigureActionManager();
-        Figure figure = null;
 
-        PaintEventDispatcher dispatcher = new PaintEventDispatcher();
         dispatcher.addEventListener(frame);
         frame.getKeyboardEventDispatcher().addEventListener(this);
 
@@ -97,6 +98,18 @@ public class Executor implements KeyboardEventListener {
 
     @Override
     public void keyPressed(int keyCode) {
-        JOptionPane.showMessageDialog(null, keyCode);
+        if (keyCode == 37) {
+            manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+        } else if (keyCode == 39) {
+            manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
+        } else if (keyCode == 32) {
+            manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
+        } else if (keyCode == 38) {
+            manager.rotateFigure(figure, field);
+        } else {
+            manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
+        }
+        field.checkScores();
+        dispatcher.paintField(field);
     }
 }
