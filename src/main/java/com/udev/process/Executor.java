@@ -60,7 +60,6 @@ public class Executor implements KeyboardEventListener {
 
     // TODO: Rotation.
     // TODO: Fix reading of the input data.
-    // TODO: UI
     // TODO: JavaDocs
     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
     // TODO: Figure is moving through 2 cells
