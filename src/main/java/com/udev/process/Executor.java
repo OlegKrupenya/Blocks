@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.Timer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -58,11 +59,14 @@ public class Executor implements KeyboardEventListener {
      */
     private Random rand = new Random();
 
+    /**
+     * Timer to move the figure downwards.
+     */
+    private Timer timer = new Timer();
+
     // TODO: Rotation.
-    // TODO: Fix reading of the input data.
     // TODO: JavaDocs
     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
-    // TODO: Figure is moving through 2 cells
     // TODO: Add multithreading:
     /*
         Queue will hold tasks (movement or rotation) and execute them.
@@ -90,6 +94,15 @@ public class Executor implements KeyboardEventListener {
             field.setNotFull(hasFreeSpace);
         }
         dispatcher.paintField(field);
+
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                keyPressed(40);
+            }
+        };
+        timer.schedule(timerTask, 0, 500);
     }
 
     public static void main(String[] args) {
@@ -129,6 +142,7 @@ public class Executor implements KeyboardEventListener {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Your score is: " + field.getScores());
+            timer.cancel();
         }
     }
 }
