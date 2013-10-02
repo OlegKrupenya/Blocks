@@ -1,6 +1,7 @@
 package com.udev.ui;
 
 import com.udev.domain.Field;
+import com.udev.events.KeyboardEventDispatcher;
 import com.udev.events.PaintEventDispatcher;
 import com.udev.events.PaintEventListener;
 
@@ -15,6 +16,8 @@ import java.awt.event.KeyListener;
  * Time: 10:14 PM
  */
 public class TetrisForm extends JFrame implements PaintEventListener {
+
+    private KeyboardEventDispatcher keyboardEventDispatcher = new KeyboardEventDispatcher();
 
     private TetrisPanel panel;
 
@@ -40,7 +43,7 @@ public class TetrisForm extends JFrame implements PaintEventListener {
 
             @Override
             public void keyPressed(KeyEvent e) {
-
+                keyboardEventDispatcher.processKey(e.getKeyCode());
             }
 
             @Override
@@ -48,6 +51,10 @@ public class TetrisForm extends JFrame implements PaintEventListener {
             }
         });
         this.add(this.panel);
+    }
+
+    public KeyboardEventDispatcher getKeyboardEventDispatcher() {
+        return keyboardEventDispatcher;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.udev.process;
 
+import com.udev.events.KeyboardEventDispatcher;
+import com.udev.events.KeyboardEventListener;
 import com.udev.events.PaintEventDispatcher;
 import com.udev.factory.FigureCreator;
 import com.udev.domain.Field;
@@ -19,13 +21,11 @@ import java.util.*;
  *         Date: 04.05.13
  *         Time: 18:38
  */
-public class Executor {
+public class Executor implements KeyboardEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(Executor.class);
 
-    public static void main(String[] args) {
-        logger.debug("Starting the application...");
-
+    public void execute() {
         TetrisForm frame = new TetrisForm();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(30 * 10 + 100, 30 * 20 + 100);
@@ -39,6 +39,7 @@ public class Executor {
 
         PaintEventDispatcher dispatcher = new PaintEventDispatcher();
         dispatcher.addEventListener(frame);
+        frame.getKeyboardEventDispatcher().addEventListener(this);
 
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
@@ -86,5 +87,16 @@ public class Executor {
             dispatcher.paintField(field);
         }
         System.out.println("Your score is: " + field.getScores());
+    }
+
+    public static void main(String[] args) {
+        logger.debug("Starting the application...");
+        Executor exec = new Executor();
+        exec.execute();
+    }
+
+    @Override
+    public void keyPressed(int keyCode) {
+        JOptionPane.showMessageDialog(null, keyCode);
     }
 }
