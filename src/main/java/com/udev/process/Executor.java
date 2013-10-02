@@ -39,7 +39,6 @@ public class Executor {
 
         PaintEventDispatcher dispatcher = new PaintEventDispatcher();
         dispatcher.addEventListener(frame);
-        frame.setDispatcher(dispatcher);
 
         while (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {

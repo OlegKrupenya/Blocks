@@ -16,17 +16,7 @@ import java.awt.event.KeyListener;
  */
 public class TetrisForm extends JFrame implements PaintEventListener {
 
-    private PaintEventDispatcher dispatcher;
-
     private TetrisPanel panel;
-
-    public PaintEventDispatcher getDispatcher() {
-        return dispatcher;
-    }
-
-    public void setDispatcher(PaintEventDispatcher dispatcher) {
-        this.dispatcher = dispatcher;
-    }
 
     /**
      * Constructs a new frame that is initially invisible.
