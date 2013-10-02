@@ -64,7 +64,6 @@ public class Executor implements KeyboardEventListener {
     // TODO: JavaDocs
     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
     // TODO: Figure is moving through 2 cells
-
     // TODO: Add multithreading:
     /*
         Queue will hold tasks (movement or rotation) and execute them.
