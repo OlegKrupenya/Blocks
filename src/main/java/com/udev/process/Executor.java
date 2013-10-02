@@ -50,6 +50,7 @@ public class Executor {
                     // TODO: JavaDocs
                     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
                     // TODO: Figure is moving through 2 cells
+                    // TODO: Add a thread that will listen key handling
                     int ch;
                     while (true) {
                         ch = System.in.read();
