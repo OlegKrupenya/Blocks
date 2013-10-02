@@ -23,14 +23,40 @@ import java.util.*;
  */
 public class Executor implements KeyboardEventListener {
 
+    /**
+     * Logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger(Executor.class);
 
-    private FigureActionManager manager = new FigureActionManager();
-    private Figure figure = null;
-    private Field field = new Field();
-    private PaintEventDispatcher dispatcher = new PaintEventDispatcher();
-    private Random rand = new Random();
+    /**
+     * Creator of the figures.
+     */
     private FigureCreator creator;
+
+    /**
+     * Dispatcher that notifies the form that data need to be repainted.
+     */
+    private PaintEventDispatcher dispatcher = new PaintEventDispatcher();
+
+    /**
+     * The field that contains data.
+     */
+    private Field field = new Field();
+
+    /**
+     * The current figure.
+     */
+    private Figure figure = null;
+
+    /**
+     * Manager of action with the figure.
+     */
+    private FigureActionManager manager = new FigureActionManager();
+
+    /**
+     *  Generates different type of figures.
+     */
+    private Random rand = new Random();
 
     // TODO: Rotation.
     // TODO: Fix reading of the input data.
