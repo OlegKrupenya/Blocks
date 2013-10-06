@@ -69,7 +69,9 @@ public class Executor implements Runnable {
     // TODO: Rotation.
     // TODO: JavaDocs
     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
-
+    /**
+     *  Executes the logic
+     */
     public void execute() {
         TetrisForm frame = new TetrisForm();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,6 +119,9 @@ public class Executor implements Runnable {
         executorService.execute(exec);
     }
 
+    /**
+     * Thread that listens is responsible for key handling.
+     */
     private class KeyListenerThread extends Thread implements KeyboardEventListener {
         @Override
         public void keyPressed(int keyCode) {
