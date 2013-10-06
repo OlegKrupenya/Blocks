@@ -13,13 +13,23 @@ import java.awt.*;
  */
 public class TetrisPanel extends JPanel {
 
+    /**
+     * The field to paint.
+     */
     private Field field;
 
-
+    /**
+     *
+     * @return The field to paint.
+     */
     public Field getField() {
         return field;
     }
 
+    /**
+     * Sets the field to paint.
+     * @param field  The field to paint.
+     */
     public void setField(Field field) {
         this.field = field;
     }
@@ -31,12 +41,16 @@ public class TetrisPanel extends JPanel {
         Graphics2D ga = (Graphics2D) g;
         ga.setPaint(Color.red);
         ga.drawRect(50, 50, 30 * 10, 30 * 20);
-        drawHorizontalLines(ga);
-        drawVerticalLines(ga);
-        drawField(ga);
+        paintHorizontalLines(ga);
+        paintVerticalLines(ga);
+        paintField(ga);
     }
 
-    private void drawField(Graphics2D ga) {
+    /**
+     * Paints the content of the field.
+     * @param ga Graphics2D
+     */
+    private void paintField(Graphics2D ga) {
         int x = 50;
         int y = 50;
         int width = 30;
@@ -54,7 +68,11 @@ public class TetrisPanel extends JPanel {
         }
     }
 
-    private void drawHorizontalLines(Graphics2D ga) {
+    /**
+     * Paints horizontal lines of the field.
+     * @param ga  Graphics2D
+     */
+    private void paintHorizontalLines(Graphics2D ga) {
         int x1 = 50;
         int y1 = 50;
         int x2 = 50 + 30 * 10;
@@ -67,8 +85,11 @@ public class TetrisPanel extends JPanel {
         }
     }
 
-
-    private void drawVerticalLines(Graphics2D ga) {
+    /**
+     * Paints vertical lines of the field.
+     * @param ga  Graphics2D
+     */
+    private void paintVerticalLines(Graphics2D ga) {
         int x1 = 50;
         int y1 = 50;
         int x2 = 50;
