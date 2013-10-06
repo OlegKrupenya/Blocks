@@ -14,6 +14,8 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.*;
 import java.util.Timer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +24,7 @@ import java.util.Timer;
  *         Date: 04.05.13
  *         Time: 18:38
  */
-public class Executor {
+public class Executor implements Runnable {
 
     /**
      * Logger.
@@ -107,10 +109,16 @@ public class Executor {
         timer.schedule(timerTask, 0, 500);
     }
 
+    @Override
+    public void run() {
+        execute();
+    }
+
     public static void main(String[] args) {
         logger.debug("Starting the application...");
-        Executor exec = new Executor();
-        exec.execute();
+        Runnable exec = new Executor();
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        executorService.execute(exec);
     }
 
     private class KeyListenerThread extends Thread implements KeyboardEventListener {
