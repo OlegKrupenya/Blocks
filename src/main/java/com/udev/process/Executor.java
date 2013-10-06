@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.Timer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,7 +24,55 @@ import java.util.*;
  */
 public class Executor implements KeyboardEventListener {
 
+    /**
+     * Logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger(Executor.class);
+
+    /**
+     * Creator of the figures.
+     */
+    private FigureCreator creator;
+
+    /**
+     * Dispatcher that notifies the form that data need to be repainted.
+     */
+    private PaintEventDispatcher dispatcher = new PaintEventDispatcher();
+
+    /**
+     * The field that contains data.
+     */
+    private Field field = new Field();
+
+    /**
+     * The current figure.
+     */
+    private Figure figure = null;
+
+    /**
+     * Manager of action with the figure.
+     */
+    private FigureActionManager manager = new FigureActionManager();
+
+    /**
+     *  Generates different type of figures.
+     */
+    private Random rand = new Random();
+
+    /**
+     * Timer to move the figure downwards.
+     */
+    private Timer timer = new Timer();
+
+    // TODO: Rotation.
+    // TODO: JavaDocs
+    // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
+    // TODO: Add multithreading:
+    /*
+        Queue will hold tasks (movement or rotation) and execute them.
+        One thread will listen key handling and add tasks to the queue.
+        The second one will add a task to move the figure down by the timer.
+     */
 
     public void execute() {
         TetrisForm frame = new TetrisForm();
@@ -31,52 +80,54 @@ public class Executor implements KeyboardEventListener {
         frame.setSize(30 * 10 + 100, 30 * 20 + 100);
         frame.setVisible(true);
 
-        Field field = new Field();
-        Random rand = new Random();
-        FigureCreator creator;
-        FigureActionManager manager = new FigureActionManager();
-        Figure figure = null;
-
-        PaintEventDispatcher dispatcher = new PaintEventDispatcher();
         dispatcher.addEventListener(frame);
         frame.getKeyboardEventDispatcher().addEventListener(this);
 
-        while (field.isNotFull()) {
+        creator = manager.getCreator(rand.nextInt(7));
+        dispatcher.paintField(field);
+
+        figure = creator.createFigure();
+        boolean hasFreeSpace = manager.addFigureToField(figure, field);
+        if (hasFreeSpace) {
+            field.setPossibleMoveFigure(true);
+        } else {
+            field.setNotFull(hasFreeSpace);
+        }
+        dispatcher.paintField(field);
+
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                keyPressed(40);
+            }
+        };
+        timer.schedule(timerTask, 0, 500);
+    }
+
+    public static void main(String[] args) {
+        logger.debug("Starting the application...");
+        Executor exec = new Executor();
+        exec.execute();
+    }
+
+    @Override
+    public void keyPressed(int keyCode) {
+        if (field.isNotFull()) {
             if (field.isPossibleMoveFigure()) {
-                try {
-                    // TODO: Rotation.
-                    // TODO: Fix reading of the input data.
-                    // TODO: UI
-                    // TODO: JavaDocs
-                    // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
-                    // TODO: Figure is moving through 2 cells
-                    // TODO: Add multithreading:
-                    /*
-                        Queue will hold tasks (movement or rotation) and execute them.
-                        One thread will listen key handling and add tasks to the queue.
-                        The second one will add a task to move the figure down by the timer.
-                     */
-                    int ch;
-                    while (true) {
-                        ch = System.in.read();
-                        if (ch == 49) {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
-                        } else if (ch == 50) {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
-                        } else if (ch == 52) {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
-                        } else if (ch == 53) {
-                            manager.rotateFigure(figure, field);
-                        } else {
-                            manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
-                            break;
-                        }
-                    }
-                    field.checkScores();
-                } catch (IOException e) {
-                    logger.error("Error during reading the input data.");
-                    break;
+                if (keyCode == 37) {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+                } else if (keyCode == 39) {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
+                } else if (keyCode == 32) {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
+                } else if (keyCode == 38) {
+                    manager.rotateFigure(figure, field);
+                } else {
+                    manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
                 }
+                field.checkScores();
+                dispatcher.paintField(field);
             } else {
                 creator = manager.getCreator(rand.nextInt(7));
                 dispatcher.paintField(field);
@@ -89,19 +140,9 @@ public class Executor implements KeyboardEventListener {
                     field.setNotFull(hasFreeSpace);
                 }
             }
-            dispatcher.paintField(field);
+        } else {
+            JOptionPane.showMessageDialog(null, "Your score is: " + field.getScores());
+            timer.cancel();
         }
-        System.out.println("Your score is: " + field.getScores());
-    }
-
-    public static void main(String[] args) {
-        logger.debug("Starting the application...");
-        Executor exec = new Executor();
-        exec.execute();
-    }
-
-    @Override
-    public void keyPressed(int keyCode) {
-        JOptionPane.showMessageDialog(null, keyCode);
     }
 }

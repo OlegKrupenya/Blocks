@@ -61,6 +61,5 @@ public class TetrisForm extends JFrame implements PaintEventListener {
     public void paintField(Field field) {
         this.panel.setField(field);
         this.panel.repaint();
-        field.showData();
     }
 }
