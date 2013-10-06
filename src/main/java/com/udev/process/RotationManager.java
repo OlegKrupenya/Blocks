@@ -41,7 +41,7 @@ public class RotationManager {
      * @param figure The figure to rotate.
      * @param field  The Field.
      */
-    public void rotate(Figure figure, Field field) {
+    protected void rotate(Figure figure, Field field) {
         if (figure instanceof Stick) {
             rotateStick(figure, field);
         }

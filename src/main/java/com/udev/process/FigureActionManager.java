@@ -22,25 +22,12 @@ public class FigureActionManager {
      */
     private static final Logger logger = LoggerFactory.getLogger(FigureActionManager.class);
 
-    /**
-     * Creator that creates cubes.
-     */
-    private FigureCreator cubeCreator = new CubeCreator();
+
 
     /**
-     * Creator that creates {@link com.udev.domain.figures.LFigure}
+     * Creation manager.
      */
-    private FigureCreator lFigureCreator = new LFigureCreator();
-
-    /**
-     * Creator that creates {@link com.udev.domain.figures.ReverseLFigure}
-     */
-    private FigureCreator reverseLFigureCreator = new ReverseLFigureCreator();
-
-    /**
-     * Creator that creates {@link com.udev.domain.figures.ReverseZFigure}
-     */
-    private FigureCreator reverseZFigureCreator = new ReverseZFigureCreator();
+    private CreationManager creationManager = new CreationManager();
 
     /**
      * Movement manager.
@@ -51,21 +38,6 @@ public class FigureActionManager {
      * Rotation manager.
      */
     private RotationManager rotationManager = new RotationManager();
-
-    /**
-     * Creator that creates {@link com.udev.domain.figures.TFigure}
-     */
-    private FigureCreator tFigureCreator = new TFigureCreator();
-
-    /**
-     * Creator that creates sticks.
-     */
-    private FigureCreator stickCreator = new StickCreator();
-
-    /**
-     * Creator that creates {@link com.udev.domain.figures.ZFigure}
-     */
-    private FigureCreator zFigureCreator = new ZFigureCreator();
 
     /**
      * Determines direction to move a figure
@@ -99,37 +71,7 @@ public class FigureActionManager {
      * @return Creator of the figure.
      */
     public FigureCreator getCreator(int index) {
-        FigureCreator creator;
-        switch (index) {
-            case 0: {
-                creator = cubeCreator;
-                break;
-            }
-            case 1: {
-                creator = lFigureCreator;
-                break;
-            }
-            case 2: {
-                creator = reverseLFigureCreator;
-                break;
-            }
-            case 3: {
-                creator = tFigureCreator;
-                break;
-            }
-            case 4: {
-                creator = zFigureCreator;
-                break;
-            }
-            case 5: {
-                creator = reverseZFigureCreator;
-                break;
-            }
-            default: {
-                creator = stickCreator;
-            }
-        }
-        return creator;
+        return creationManager.getCreator(index);
     }
 
     public boolean addFigureToField(Figure figure, Field field) {
