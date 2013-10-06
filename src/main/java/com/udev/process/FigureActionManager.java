@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class FigureActionManager {
 
+    /**
+     * Logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger(FigureActionManager.class);
 
     /**
@@ -38,6 +41,11 @@ public class FigureActionManager {
      * Creator that creates {@link com.udev.domain.figures.ReverseZFigure}
      */
     private FigureCreator reverseZFigureCreator = new ReverseZFigureCreator();
+
+    /**
+     * Movement manager.
+     */
+    private MovementManager movementManager = new MovementManager();
 
     /**
      * Rotation manager.
@@ -148,19 +156,19 @@ public class FigureActionManager {
     public void moveFigure(Figure figure, Field field, Move direction) {
         switch (direction) {
             case DOWN: {
-                moveFigureDownwards(figure, field);
+                movementManager.moveFigureDownwards(figure, field);
                 break;
             }
             case LEFT: {
-                moveFigureLeft(figure, field);
+                movementManager.moveFigureLeft(figure, field);
                 break;
             }
             case RIGHT: {
-                moveFigureRight(figure, field);
+                movementManager.moveFigureRight(figure, field);
                 break;
             }
             case FAST_DOWN:{
-                moveFigureFastDownwards(figure, field);
+                movementManager.moveFigureFastDownwards(figure, field);
                 break;
             }
         }
@@ -175,148 +183,5 @@ public class FigureActionManager {
         this.rotationManager.rotate(figure, field);
     }
 
-    /**
-     * Returns {@code true} if it is possible to move the figure downwards.
-     *
-     * @param figure The figure to move
-     * @param field  The field
-     * @return {@code true} if it is possible to move the figure downwards.
-     */
-    private boolean isPossibleToMoveTheFigureDownwards(Figure figure, Field field) {
-        boolean canMove = true;
-        Cell[][] data = field.getCells();
-        List<Cell> cells = figure.getCells();
-        for (Cell cell : cells) {
-            // TODO: HEIGHT should be here!!!!
-            if (!(cell.getI() != 19 && (data[cell.getI() + 1][cell.getJ()].getData() == Field.ZERO
-                    || figure.contains(data[cell.getI() + 1][cell.getJ()])))) {
-                canMove = false;
-                break;
-            }
-        }
-        field.setPossibleMoveFigure(canMove);
-        return canMove;
-    }
 
-    /**
-     * Returns {@code true} if it is possible to move the figure left.
-     *
-     * @param figure The figure to move
-     * @param field  The field
-     * @return {@code true} if it is possible to move the figure left.
-     */
-    private boolean isPossibleToMoveTheFigureLeft(Figure figure, Field field) {
-        boolean canMove = true;
-        Cell[][] data = field.getCells();
-        List<Cell> cells = figure.getCells();
-        for (Cell cell : cells) {
-            if (!(cell.getJ() > 0 && (data[cell.getI()][cell.getJ() - 1].getData() == Field.ZERO
-                    || figure.contains(data[cell.getI()][cell.getJ() - 1])))) {
-                canMove = false;
-                break;
-            }
-        }
-        return canMove;
-    }
-
-    /**
-     * Returns {@code true} if it is possible to move the figure left.
-     *
-     * @param figure The figure to move
-     * @param field  The field
-     * @return {@code true} if it is possible to move the figure left.
-     */
-    private boolean isPossibleToMoveTheFigureRight(Figure figure, Field field) {
-        boolean canMove = true;
-        Cell[][] data = field.getCells();
-        List<Cell> cells = figure.getCells();
-        for (Cell cell : cells) {
-            if (!(cell.getJ() < 9 && (data[cell.getI()][cell.getJ() + 1].getData() == Field.ZERO
-                    || figure.contains(data[cell.getI()][cell.getJ() + 1])))) {
-                canMove = false;
-                break;
-            }
-        }
-        return canMove;
-    }
-
-    /**
-     * Moves the figure downwards.
-     *
-     * @param figure The figure to move.
-     * @param field  The field.
-     */
-    private void moveFigureDownwards(Figure figure, Field field) {
-        Cell[][] data = field.getCells();
-        List<Cell> cells = figure.getCells();
-        List<Cell> alreadyMovedCells = new ArrayList<>(figure.getCells().size());
-        if (isPossibleToMoveTheFigureDownwards(figure, field)) {
-            for (Cell cell : cells) {
-                if (!alreadyMovedCells.contains(cell)) {
-                    data[cell.getI()][cell.getJ()].setData(Field.ZERO);
-                }
-                data[cell.getI() + 1][cell.getJ()].setData(Field.ONE);
-                alreadyMovedCells.add(data[cell.getI() + 1][cell.getJ()]);
-            }
-            figure.setCells(alreadyMovedCells);
-            logger.debug("The figure has been moved downwards:\n" + figure + "\n");
-        }
-    }
-
-    /**
-     * Drops the figure.
-     * @param figure The figure to move.
-     * @param field The field.
-     */
-    private void moveFigureFastDownwards(Figure figure, Field field) {
-        while (isPossibleToMoveTheFigureDownwards(figure, field)) {
-            moveFigureDownwards(figure, field);
-        }
-    }
-
-    /**
-     * Moves the figure left.
-     *
-     * @param figure The figure to move.
-     * @param field  The field.
-     */
-    private void moveFigureLeft(Figure figure, Field field) {
-        Cell[][] data = field.getCells();
-        List<Cell> cells = figure.getCells();
-        List<Cell> alreadyMovedCells = new ArrayList<>(figure.getCells().size());
-        if (isPossibleToMoveTheFigureLeft(figure, field)) {
-            for (Cell cell : cells) {
-                if (!alreadyMovedCells.contains(cell)) {
-                    data[cell.getI()][cell.getJ()].setData(Field.ZERO);
-                }
-                data[cell.getI()][cell.getJ() - 1].setData(Field.ONE);
-                alreadyMovedCells.add(data[cell.getI()][cell.getJ() - 1]);
-            }
-            figure.setCells(alreadyMovedCells);
-            logger.debug("The figure has been moved left:\n" + figure + "\n");
-        }
-    }
-
-    /**
-     * Moves the figure right.
-     *
-     * @param figure The figure to move.
-     * @param field  The field.
-     */
-    private void moveFigureRight(Figure figure, Field field) {
-        Cell[][] data = field.getCells();
-        List<Cell> cells = figure.getCells();
-        List<Cell> alreadyMovedCells = new ArrayList<>(figure.getCells().size());
-        if (isPossibleToMoveTheFigureRight(figure, field)) {
-            for (Cell cell : cells) {
-                if (!alreadyMovedCells.contains(cell)) {
-                    data[cell.getI()][cell.getJ()].setData(Field.ZERO);
-                }
-                data[cell.getI()][cell.getJ() + 1].setData(Field.ONE);
-                alreadyMovedCells.add(data[cell.getI()][cell.getJ() + 1]);
-            }
-            figure.setCells(alreadyMovedCells);
-            logger.debug("The figure has been moved left:\n" + figure + "\n");
-        }
-    }
 }
