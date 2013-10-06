@@ -22,7 +22,7 @@ import java.util.Timer;
  *         Date: 04.05.13
  *         Time: 18:38
  */
-public class Executor implements KeyboardEventListener {
+public class Executor {
 
     /**
      * Logger.
@@ -81,7 +81,8 @@ public class Executor implements KeyboardEventListener {
         frame.setVisible(true);
 
         dispatcher.addEventListener(frame);
-        frame.getKeyboardEventDispatcher().addEventListener(this);
+        final KeyListenerThread listenerThread = new KeyListenerThread();
+        frame.getKeyboardEventDispatcher().addEventListener(listenerThread);
 
         creator = manager.getCreator(rand.nextInt(7));
         dispatcher.paintField(field);
@@ -95,11 +96,12 @@ public class Executor implements KeyboardEventListener {
         }
         dispatcher.paintField(field);
 
+        listenerThread.start();
 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                keyPressed(40);
+                listenerThread.keyPressed(40);
             }
         };
         timer.schedule(timerTask, 0, 500);
@@ -111,38 +113,40 @@ public class Executor implements KeyboardEventListener {
         exec.execute();
     }
 
-    @Override
-    public void keyPressed(int keyCode) {
-        if (field.isNotFull()) {
-            if (field.isPossibleMoveFigure()) {
-                if (keyCode == 37) {
-                    manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
-                } else if (keyCode == 39) {
-                    manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
-                } else if (keyCode == 32) {
-                    manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
-                } else if (keyCode == 38) {
-                    manager.rotateFigure(figure, field);
+    private class KeyListenerThread extends Thread implements KeyboardEventListener {
+        @Override
+        public void keyPressed(int keyCode) {
+            if (field.isNotFull()) {
+                if (field.isPossibleMoveFigure()) {
+                    if (keyCode == 37) {
+                        manager.moveFigure(figure, field, FigureActionManager.Move.LEFT);
+                    } else if (keyCode == 39) {
+                        manager.moveFigure(figure, field, FigureActionManager.Move.RIGHT);
+                    } else if (keyCode == 32) {
+                        manager.moveFigure(figure, field, FigureActionManager.Move.FAST_DOWN);
+                    } else if (keyCode == 38) {
+                        manager.rotateFigure(figure, field);
+                    } else {
+                        manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
+                    }
+                    field.checkScores();
+                    dispatcher.paintField(field);
                 } else {
-                    manager.moveFigure(figure, field, FigureActionManager.Move.DOWN);
-                }
-                field.checkScores();
-                dispatcher.paintField(field);
-            } else {
-                creator = manager.getCreator(rand.nextInt(7));
-                dispatcher.paintField(field);
+                    creator = manager.getCreator(rand.nextInt(7));
+                    dispatcher.paintField(field);
 
-                figure = creator.createFigure();
-                boolean hasFreeSpace = manager.addFigureToField(figure, field);
-                if (hasFreeSpace) {
-                    field.setPossibleMoveFigure(true);
-                } else {
-                    field.setNotFull(hasFreeSpace);
+                    figure = creator.createFigure();
+                    boolean hasFreeSpace = manager.addFigureToField(figure, field);
+                    if (hasFreeSpace) {
+                        field.setPossibleMoveFigure(true);
+                    } else {
+                        field.setNotFull(hasFreeSpace);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Your score is: " + field.getScores());
+                timer.cancel();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Your score is: " + field.getScores());
-            timer.cancel();
         }
     }
 }
