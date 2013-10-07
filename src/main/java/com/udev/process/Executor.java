@@ -99,9 +99,7 @@ public class Executor implements Runnable {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                synchronized (Executor.this) {
-                    listenerThread.keyPressed(40);
-                }
+                listenerThread.keyPressed(40);
             }
         };
         timer.schedule(timerTask, 0, 500);
