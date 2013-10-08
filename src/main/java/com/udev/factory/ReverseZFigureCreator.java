@@ -1,8 +1,7 @@
 package com.udev.factory;
 
 import com.udev.domain.figures.Figure;
-import com.udev.domain.figures.ReverseZFigure;
-import com.udev.domain.figures.ZFigure;
+import com.udev.domain.figures.SFigure;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +13,6 @@ import com.udev.domain.figures.ZFigure;
 public class ReverseZFigureCreator implements FigureCreator {
     @Override
     public Figure createFigure() {
-        return new ReverseZFigure();
+        return new SFigure();
     }
 }

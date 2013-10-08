@@ -26,7 +26,7 @@ public class CreationManager {
     private FigureCreator reverseLFigureCreator = new ReverseLFigureCreator();
 
     /**
-     * Creator that creates {@link com.udev.domain.figures.ReverseZFigure}
+     * Creator that creates {@link com.udev.domain.figures.SFigure}
      */
     private FigureCreator reverseZFigureCreator = new ReverseZFigureCreator();
 

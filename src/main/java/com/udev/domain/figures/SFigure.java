@@ -14,7 +14,7 @@ import java.util.List;
  *         Date: 15.09.13
  *         Time: 0:33
  */
-public class ReverseZFigure implements Figure {
+public class SFigure implements Figure {
     private int height;
     private int width;
     private int leftBorder;
@@ -24,7 +24,7 @@ public class ReverseZFigure implements Figure {
     /**
      * Constructor.
      */
-    public ReverseZFigure() {
+    public SFigure() {
         init();
     }
 
