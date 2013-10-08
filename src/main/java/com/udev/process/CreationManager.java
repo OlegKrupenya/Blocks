@@ -28,7 +28,7 @@ public class CreationManager {
     /**
      * Creator that creates {@link com.udev.domain.figures.SFigure}
      */
-    private FigureCreator reverseZFigureCreator = new ReverseZFigureCreator();
+    private FigureCreator sFigureCreator = new SFigureCreator();
 
     /**
      * Creator that creates {@link com.udev.domain.figures.TFigure}
@@ -78,7 +78,7 @@ public class CreationManager {
                 break;
             }
             case 5: {
-                creator = reverseZFigureCreator;
+                creator = sFigureCreator;
                 break;
             }
             default: {

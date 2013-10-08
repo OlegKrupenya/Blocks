@@ -10,7 +10,7 @@ import com.udev.domain.figures.SFigure;
  *         Date: 15.09.13
  *         Time: 0:35
  */
-public class ReverseZFigureCreator implements FigureCreator {
+public class SFigureCreator implements FigureCreator {
     @Override
     public Figure createFigure() {
         return new SFigure();

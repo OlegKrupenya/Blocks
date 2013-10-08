@@ -82,7 +82,7 @@ public class Executor implements Runnable {
         final KeyListenerThread listenerThread = new KeyListenerThread();
         frame.getKeyboardEventDispatcher().addEventListener(listenerThread);
 
-        creator = manager.getCreator(rand.nextInt(7));
+        creator = manager.getCreator(5);
         dispatcher.paintField(field);
 
         figure = creator.createFigure();

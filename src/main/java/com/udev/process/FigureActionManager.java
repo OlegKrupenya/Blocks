@@ -1,13 +1,13 @@
 package com.udev.process;
 
 import com.udev.domain.Cell;
+import com.udev.domain.figures.SFigure;
 import com.udev.factory.*;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +37,9 @@ public class FigureActionManager {
     /**
      * Rotation manager.
      */
-    private RotationManager rotationManager = new RotationManager();
+    private RotationManager stickRotationManager = new StickRotationManager();
+
+    private RotationManager sFigureRotationManager = new SFigureRotationManager();
 
     /**
      * Determines direction to move a figure
@@ -122,7 +124,11 @@ public class FigureActionManager {
      * @param field  The field.
      */
     public void rotateFigure(Figure figure, Field field) {
-        this.rotationManager.rotate(figure, field);
+        if (figure instanceof StickRotationManager) {
+            this.stickRotationManager.rotate(figure, field);
+        } else if (figure instanceof SFigure) {
+            this.sFigureRotationManager.rotate(figure, field);
+        }
     }
 
 
