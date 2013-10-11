@@ -8,7 +8,6 @@ import com.udev.domain.figures.Stick;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -38,6 +37,7 @@ public class StickRotationManager implements RotationManager {
 
     /**
      * Rotates the figure.
+     *
      * @param figure The figure to rotate.
      * @param field  The Field.
      */
@@ -71,8 +71,7 @@ public class StickRotationManager implements RotationManager {
             fourth.setJ(centerOfRotation.getJ());
 
             figure.setRotationState(RotationState.VERTICAL);
-        }
-        else if (state == RotationState.VERTICAL && isPossibleToRotateStickHorizontally(figure, field)) {
+        } else if (state == RotationState.VERTICAL && isPossibleToRotateStickHorizontally(figure, field)) {
             centerOfRotation = cells.get(1);
             Cell first = cells.get(0);
             data[first.getI()][first.getJ()] = new Cell(first.getI(), first.getJ(), Field.ZERO);
