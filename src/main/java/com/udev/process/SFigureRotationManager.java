@@ -65,8 +65,6 @@ public class SFigureRotationManager implements RotationManager {
             Cell fourthCell = cells.get(3);
             data[fourthCell.getI() - 1][fourthCell.getJ() + 1] = new Cell(fourthCell.getI() - 1, fourthCell.getJ() + 1,
                     Field.ONE);
-            data[fourthCell.getI()][fourthCell.getJ()] = new Cell(fourthCell.getI(), fourthCell.getJ(),
-                    Field.ZERO);
             fourthCell.setI(fourthCell.getI() - 1);
             fourthCell.setJ(fourthCell.getJ() + 1);
             figure.setRotationState(RotationState.HORIZONTAL);
