@@ -26,12 +26,15 @@ public class SFigureRotationManager implements RotationManager {
         RotationState state = figure.getRotationState();
         if (state == RotationState.HORIZONTAL && isPossibleToRotateVertically(figure, field)) {
             Cell firstCell = cells.get(0);
+            data[firstCell.getI()][firstCell.getJ()] = new Cell(firstCell.getI(), firstCell.getJ(), Field.ZERO);
             data[firstCell.getI() - 2][firstCell.getJ()] = new Cell(firstCell.getI() - 2, firstCell.getJ(), Field.ONE);
             firstCell.setI(firstCell.getI() - 2);
             firstCell.setJ(firstCell.getJ());
 
             Cell secondCell = cells.get(1);
-            data[firstCell.getI() - 1][firstCell.getJ()] = new Cell(secondCell.getI() - 1, secondCell.getJ() - 1,
+            data[secondCell.getI()][secondCell.getJ()] = new Cell(secondCell.getI(), secondCell.getJ(),
+                    Field.ZERO);
+            data[secondCell.getI() - 1][secondCell.getJ() - 1] = new Cell(secondCell.getI() - 1, secondCell.getJ() - 1,
                     Field.ONE);
             secondCell.setI(secondCell.getI() - 1);
             secondCell.setJ(secondCell.getJ() - 1);
@@ -43,7 +46,7 @@ public class SFigureRotationManager implements RotationManager {
             data[fourthCell.getI() + 1][fourthCell.getJ() - 1] = new Cell(fourthCell.getI() + 1, fourthCell.getJ() - 1,
                     Field.ONE);
             fourthCell.setI(fourthCell.getI() + 1);
-            fourthCell.setI(fourthCell.getJ() - 1);
+            fourthCell.setJ(fourthCell.getJ() - 1);
             figure.setRotationState(RotationState.VERTICAL);
         } else if (state == RotationState.VERTICAL && isPossibleToRotateHorizontally(figure, field)) {
             //figure.setRotationState(RotationState.HORIZONTAL);
