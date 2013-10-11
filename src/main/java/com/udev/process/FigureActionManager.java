@@ -2,6 +2,7 @@ package com.udev.process;
 
 import com.udev.domain.Cell;
 import com.udev.domain.figures.SFigure;
+import com.udev.domain.figures.Stick;
 import com.udev.factory.*;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
@@ -124,7 +125,7 @@ public class FigureActionManager {
      * @param field  The field.
      */
     public void rotateFigure(Figure figure, Field field) {
-        if (figure instanceof StickRotationManager) {
+        if (figure instanceof Stick) {
             this.stickRotationManager.rotate(figure, field);
         } else if (figure instanceof SFigure) {
             this.sFigureRotationManager.rotate(figure, field);
