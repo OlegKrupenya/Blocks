@@ -1,11 +1,14 @@
 package com.udev.process;
 
 import com.udev.domain.Cell;
-import com.udev.domain.figures.SFigure;
-import com.udev.domain.figures.Stick;
-import com.udev.factory.*;
 import com.udev.domain.Field;
 import com.udev.domain.figures.Figure;
+import com.udev.domain.figures.SFigure;
+import com.udev.domain.figures.ZFigure;
+import com.udev.domain.figures.Stick;
+import com.udev.factory.CubeCreator;
+import com.udev.factory.FigureCreator;
+import com.udev.factory.LFigureCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,11 +39,19 @@ public class FigureActionManager {
     private MovementManager movementManager = new MovementManager();
 
     /**
-     * Rotation manager.
+     * Rotation of the {@link Stick}.
      */
     private RotationManager stickRotationManager = new StickRotationManager();
 
+    /**
+     * Rotation of the {@link SFigure}.
+     */
     private RotationManager sFigureRotationManager = new SFigureRotationManager();
+
+    /**
+     * Rotation of the {@link ZFigure}.
+     */
+    private RotationManager zFigureRotationManager = new ZFigureRotationManager();
 
     /**
      * Determines direction to move a figure
@@ -129,6 +140,8 @@ public class FigureActionManager {
             this.stickRotationManager.rotate(figure, field);
         } else if (figure instanceof SFigure) {
             this.sFigureRotationManager.rotate(figure, field);
+        } else if (figure instanceof ZFigure) {
+            this.zFigureRotationManager.rotate(figure, field);
         }
     }
 
