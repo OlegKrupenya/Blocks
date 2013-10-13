@@ -66,7 +66,6 @@ public class Executor implements Runnable {
      */
     private Timer timer = new Timer();
 
-    // TODO: Rotation.
     // TODO: JavaDocs
     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
     // TODO: Fixing of the rotation of the Stick.

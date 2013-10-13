@@ -51,42 +51,44 @@ public class StickRotationManager implements RotationManager {
         Cell[][] data = field.getCells();
         List<Cell> cells = figure.getCells();
         RotationState state = figure.getRotationState();
-        Cell centerOfRotation;
         if (state == RotationState.HORIZONTAL && isPossibleToRotateStickVertically(figure, field)) {
-            centerOfRotation = cells.get(1);
-
             Cell first = cells.get(0);
             data[first.getI()][first.getJ()] = new Cell(first.getI(), first.getJ(), Field.ZERO);
-            first.setI(centerOfRotation.getI() - 1);
-            first.setJ(centerOfRotation.getJ());
+            data[first.getI() - 1][first.getJ() + 1] = new Cell(first.getI() - 1, first.getJ() + 1, Field.ONE);
+            first.setI(first.getI() - 1);
+            first.setJ(first.getJ() + 1);
 
             Cell third = cells.get(2);
             data[third.getI()][third.getJ()] = new Cell(third.getI(), third.getJ(), Field.ZERO);
-            third.setI(centerOfRotation.getI() + 1);
-            third.setJ(centerOfRotation.getJ());
+            data[third.getI() + 1][third.getJ() - 1] = new Cell(third.getI() + 1, third.getJ() - 1, Field.ONE);
+            third.setI(third.getI() + 1);
+            third.setJ(third.getJ() - 1);
 
             Cell fourth = cells.get(3);
             data[fourth.getI()][fourth.getJ()] = new Cell(fourth.getI(), fourth.getJ(), Field.ZERO);
-            fourth.setI(centerOfRotation.getI() + 2);
-            fourth.setJ(centerOfRotation.getJ());
+            data[fourth.getI() + 2][fourth.getJ() - 2] = new Cell(fourth.getI() + 2, fourth.getJ() - 2, Field.ONE);
+            fourth.setI(fourth.getI() + 2);
+            fourth.setJ(fourth.getJ() - 2);
 
             figure.setRotationState(RotationState.VERTICAL);
         } else if (state == RotationState.VERTICAL && isPossibleToRotateStickHorizontally(figure, field)) {
-            centerOfRotation = cells.get(1);
             Cell first = cells.get(0);
             data[first.getI()][first.getJ()] = new Cell(first.getI(), first.getJ(), Field.ZERO);
-            first.setI(centerOfRotation.getI());
-            first.setJ(centerOfRotation.getJ() - 1);
+            data[first.getI() + 1][first.getJ() - 1] = new Cell(first.getI() + 1, first.getJ() - 1, Field.ONE);
+            first.setI(first.getI() + 1);
+            first.setJ(first.getJ() - 1);
 
             Cell third = cells.get(2);
             data[third.getI()][third.getJ()] = new Cell(third.getI(), third.getJ(), Field.ZERO);
-            third.setI(centerOfRotation.getI());
-            third.setJ(centerOfRotation.getJ() + 1);
+            data[third.getI() - 1][third.getJ() + 1] = new Cell(third.getI() - 1, third.getJ() + 1, Field.ONE);
+            third.setI(third.getI() - 1);
+            third.setJ(third.getJ() + 1);
 
             Cell fourth = cells.get(3);
             data[fourth.getI()][fourth.getJ()] = new Cell(fourth.getI(), fourth.getJ(), Field.ZERO);
-            fourth.setI(centerOfRotation.getI());
-            fourth.setJ(centerOfRotation.getJ() + 2);
+            data[fourth.getI() - 2][fourth.getJ() + 2] = new Cell(fourth.getI() - 2, fourth.getJ() + 2, Field.ONE);
+            fourth.setI(fourth.getI() - 2);
+            fourth.setJ(fourth.getJ() + 2);
 
             figure.setRotationState(RotationState.HORIZONTAL);
         }
