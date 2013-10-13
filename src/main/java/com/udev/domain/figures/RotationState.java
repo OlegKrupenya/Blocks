@@ -8,5 +8,5 @@ package com.udev.domain.figures;
  *         Time: 23:59
  */
 public enum RotationState {
-    HORIZONTAL, VERTICAL;
+    HORIZONTAL, BACK_HORIZONTAL, VERTICAL, BACK_VERTICAL;
 }
