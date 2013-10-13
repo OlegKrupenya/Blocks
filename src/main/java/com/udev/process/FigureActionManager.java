@@ -30,9 +30,19 @@ public class FigureActionManager {
     private CreationManager creationManager = new CreationManager();
 
     /**
+     * Rotation of the {@link LFigure}.
+     */
+    private RotationManager lFigureRotationManager = new LFigureRotationManager();
+
+    /**
      * Movement manager.
      */
     private MovementManager movementManager = new MovementManager();
+
+    /**
+     * Rotation manager of the {@link ReverseLFigure}.
+     */
+    private RotationManager reverseLFigureRotationManager = new ReverseLFigureRotationManager();
 
     /**
      * Rotation of the {@link Stick}.
@@ -44,6 +54,9 @@ public class FigureActionManager {
      */
     private RotationManager sFigureRotationManager = new SFigureRotationManager();
 
+    /**
+     * Rotation of the {@link TFigure}
+     */
     private RotationManager tFigureRotationManager = new TFigureRotationManager();
 
     /**
@@ -143,6 +156,10 @@ public class FigureActionManager {
             this.zFigureRotationManager.rotate(figure, field);
         } else if (figure instanceof TFigure) {
             this.tFigureRotationManager.rotate(figure, field);
+        } else if (figure instanceof LFigure) {
+            this.lFigureRotationManager.rotate(figure, field);
+        } else if (figure instanceof ReverseLFigure) {
+            this.reverseLFigureRotationManager.rotate(figure, field);
         }
     }
 

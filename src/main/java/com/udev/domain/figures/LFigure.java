@@ -112,6 +112,7 @@ public class LFigure implements Figure {
         this.width = 3;
         this.leftBorder = Field.CREATE_FIGURE_LEFT_COORDINATE;
         this.cells = new ArrayList<>(4);
+        this.rotationState = RotationState.HORIZONTAL;
         clear();
     }
 }

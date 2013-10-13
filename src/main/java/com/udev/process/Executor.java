@@ -69,7 +69,7 @@ public class Executor implements Runnable {
     // TODO: Rotation.
     // TODO: JavaDocs
     // TODO: WIDTH and HEIGHT should be used instead of 10 and 20.
-    // TODO: Fixing of the rotation of the Stick and SFigure.
+    // TODO: Fixing of the rotation of the Stick.
 
     /**
      *  Executes the logic
