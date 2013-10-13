@@ -2,10 +2,7 @@ package com.udev.process;
 
 import com.udev.domain.Cell;
 import com.udev.domain.Field;
-import com.udev.domain.figures.Figure;
-import com.udev.domain.figures.SFigure;
-import com.udev.domain.figures.ZFigure;
-import com.udev.domain.figures.Stick;
+import com.udev.domain.figures.*;
 import com.udev.factory.CubeCreator;
 import com.udev.factory.FigureCreator;
 import com.udev.factory.LFigureCreator;
@@ -27,7 +24,6 @@ public class FigureActionManager {
     private static final Logger logger = LoggerFactory.getLogger(FigureActionManager.class);
 
 
-
     /**
      * Creation manager.
      */
@@ -47,6 +43,8 @@ public class FigureActionManager {
      * Rotation of the {@link SFigure}.
      */
     private RotationManager sFigureRotationManager = new SFigureRotationManager();
+
+    private RotationManager tFigureRotationManager = new TFigureRotationManager();
 
     /**
      * Rotation of the {@link ZFigure}.
@@ -123,7 +121,7 @@ public class FigureActionManager {
                 movementManager.moveFigureRight(figure, field);
                 break;
             }
-            case FAST_DOWN:{
+            case FAST_DOWN: {
                 movementManager.moveFigureFastDownwards(figure, field);
                 break;
             }
@@ -132,6 +130,7 @@ public class FigureActionManager {
 
     /**
      * Rotates the figure
+     *
      * @param figure The figure to rotate.
      * @param field  The field.
      */
@@ -142,6 +141,8 @@ public class FigureActionManager {
             this.sFigureRotationManager.rotate(figure, field);
         } else if (figure instanceof ZFigure) {
             this.zFigureRotationManager.rotate(figure, field);
+        } else if (figure instanceof TFigure) {
+            this.tFigureRotationManager.rotate(figure, field);
         }
     }
 
