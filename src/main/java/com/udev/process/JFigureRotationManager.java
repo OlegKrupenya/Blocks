@@ -12,7 +12,7 @@ import java.util.List;
  * User: taipan
  * Date: 13.10.13
  */
-public class ReverseLFigureRotationManager implements RotationManager {
+public class JFigureRotationManager implements RotationManager {
 
     @Override
     public void rotate(Figure figure, Field field) {

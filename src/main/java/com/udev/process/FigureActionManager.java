@@ -40,9 +40,9 @@ public class FigureActionManager {
     private MovementManager movementManager = new MovementManager();
 
     /**
-     * Rotation manager of the {@link ReverseLFigure}.
+     * Rotation manager of the {@link com.udev.domain.figures.JFigure}.
      */
-    private RotationManager reverseLFigureRotationManager = new ReverseLFigureRotationManager();
+    private RotationManager reverseLFigureRotationManager = new JFigureRotationManager();
 
     /**
      * Rotation of the {@link Stick}.
@@ -158,7 +158,7 @@ public class FigureActionManager {
             this.tFigureRotationManager.rotate(figure, field);
         } else if (figure instanceof LFigure) {
             this.lFigureRotationManager.rotate(figure, field);
-        } else if (figure instanceof ReverseLFigure) {
+        } else if (figure instanceof JFigure) {
             this.reverseLFigureRotationManager.rotate(figure, field);
         }
     }

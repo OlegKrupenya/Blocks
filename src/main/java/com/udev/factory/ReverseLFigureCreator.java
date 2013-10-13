@@ -1,7 +1,7 @@
 package com.udev.factory;
 
 import com.udev.domain.figures.Figure;
-import com.udev.domain.figures.ReverseLFigure;
+import com.udev.domain.figures.JFigure;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +13,6 @@ import com.udev.domain.figures.ReverseLFigure;
 public class ReverseLFigureCreator implements FigureCreator {
     @Override
     public Figure createFigure() {
-        return new ReverseLFigure();
+        return new JFigure();
     }
 }

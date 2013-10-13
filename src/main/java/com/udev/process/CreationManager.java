@@ -21,7 +21,7 @@ public class CreationManager {
     private FigureCreator lFigureCreator = new LFigureCreator();
 
     /**
-     * Creator that creates {@link com.udev.domain.figures.ReverseLFigure}
+     * Creator that creates {@link com.udev.domain.figures.JFigure}
      */
     private FigureCreator reverseLFigureCreator = new ReverseLFigureCreator();
 
