@@ -84,7 +84,7 @@ public class Executor implements Runnable {
         final KeyListenerThread listenerThread = new KeyListenerThread();
         frame.getKeyboardEventDispatcher().addEventListener(listenerThread);
 
-        creator = manager.getCreator(3);
+        creator = manager.getCreator(rand.nextInt(7));
         dispatcher.paintField(field);
 
         figure = creator.createFigure();
@@ -142,7 +142,7 @@ public class Executor implements Runnable {
                         field.checkScores();
                         dispatcher.paintField(field);
                     } else {
-                        creator = manager.getCreator(3);
+                        creator = manager.getCreator(rand.nextInt(7));
                         dispatcher.paintField(field);
 
                         figure = creator.createFigure();
