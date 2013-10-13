@@ -100,10 +100,10 @@ public class LFigure implements Figure {
     @Override
     public void clear() {
         cells.addAll(Arrays.asList(
-            new Cell(0, this.leftBorder + 2, Field.ONE),
             new Cell(1, this.leftBorder, Field.ONE),
             new Cell(1, this.leftBorder + 1, Field.ONE),
-            new Cell(1, this.leftBorder + 2, Field.ONE)
+            new Cell(1, this.leftBorder + 2, Field.ONE),
+            new Cell(0, this.leftBorder + 2, Field.ONE)
         ));
     }
 
