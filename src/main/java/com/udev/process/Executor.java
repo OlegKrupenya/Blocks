@@ -103,7 +103,7 @@ public class Executor implements Runnable {
                 listenerThread.keyPressed(40);
             }
         };
-        timer.schedule(timerTask, 0, 500);
+        timer.schedule(timerTask, 0, 400);
     }
 
     @Override
