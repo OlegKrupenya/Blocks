@@ -42,11 +42,6 @@ public class Executor implements Runnable {
     private PaintEventDispatcher dispatcher = new PaintEventDispatcher();
 
     /**
-     * The field that contains data.
-     */
-    private Field field = new Field();
-
-    /**
      * The current figure.
      */
     private Figure figure = null;
@@ -55,6 +50,11 @@ public class Executor implements Runnable {
      * Manager of action with the figure.
      */
     private FigureActionManager manager = new FigureActionManager();
+
+    /**
+     * The field that contains data.
+     */
+    private Field field = new Field();
 
     /**
      * Generates different type of figures.
